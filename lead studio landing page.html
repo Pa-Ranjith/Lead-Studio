@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- PRIMARY SEO -->
+    <title>Lead Studio | Landing Pages That Bring Enquiries</title>
+    <meta name="description" content="Focused landing pages engineered to drive action and generate enquiries within days. Stop losing visitors, start getting leads.">
+    
+    <!-- OPEN GRAPH / SOCIAL (WhatsApp, LinkedIn, Facebook) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://leadstudio.com/">
+    <meta property="og:title" content="Lead Studio | Landing Pages That Bring Enquiries">
+    <meta property="og:description" content="Focused landing pages engineered to drive action and generate enquiries within days.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=630">
+
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://leadstudio.com/">
+    <meta name="twitter:title" content="Lead Studio | Landing Pages That Bring Enquiries">
+    <meta name="twitter:description" content="Focused landing pages engineered to drive action and generate enquiries within days.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=630">
+    
+    <!-- PRELOADS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- SCRIPTS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+
+    <style>
+        :root {
+            --brand: #2563EB;
+            --brand-glow: rgba(37, 99, 235, 0.15);
+            --obsidian: #0A0A0A;
+            --obsidian-alt: #0D0D0D;
+        }
+
+        html, body {
+            background-color: var(--obsidian);
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-syne { font-family: 'Syne', sans-serif; }
+
+        /* BRAND ACCENT */
+        .brand-accent {
+            color: #60A5FA;
+            background: rgba(37, 99, 235, 0.15);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            padding: 0.1em 0.4em;
+            border-radius: 0.25em;
+            display: inline-block;
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            text-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+        }
+
+        /* ATMOSPHERIC DEPTH */
+        .noise-bg::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .ambient-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.15; transform: scale(1); }
+            50% { opacity: 0.25; transform: scale(1.05); }
+        }
+        .animate-pulse-glow { animation: pulse-glow 10s infinite ease-in-out; }
+
+        /* SCENE SYSTEM */
+        .scene-gap { padding-top: clamp(8rem, 16vh, 12rem); padding-bottom: clamp(8rem, 16vh, 12rem); position: relative; }
+        .scene-h { min-height: clamp(600px, 90vh, 1000px); position: relative; }
+        
+        /* TYPOGRAPHY */
+        .h-hero { font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1.05; }
+        .h-scene { font-size: clamp(2.25rem, 5vw, 4rem); line-height: 1.1; }
+        .h-card { font-size: clamp(1.5rem, 2vw, 2rem); line-height: 1.3; }
+        .p-lead { font-size: clamp(1.25rem, 1.8vw, 1.5rem); line-height: 1.5; max-width: 65ch; }
+
+        .text-secondary { color: rgba(255, 255, 255, 0.65); }
+        .mask-text {
+            background: linear-gradient(to bottom, #fff 0%, rgba(255,255,255,0.4) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* PREMIUM CARDS */
+        .premium-card {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(24px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        /* Button resets for a11y */
+        button { text-align: left; background: none; border: none; font: inherit; cursor: pointer; color: inherit; width: 100%; }
+
+        .premium-card.interactive:hover, .premium-card.interactive:focus-visible {
+            background: rgba(255, 255, 255, 0.025);
+            border-color: rgba(37, 99, 235, 0.3);
+            transform: translateY(-8px);
+            outline: none;
+        }
+        .premium-card.interactive:focus-visible { box-shadow: 0 0 0 2px var(--brand); }
+
+        /* FIXED INTERFACE */
+        #sticky-cta { transform: translateY(120%); transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 1000; }
+        #sticky-cta.visible { transform: translateY(0); }
+        #floating-whatsapp { transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 900; }
+        #floating-whatsapp.cta-active { bottom: 160px; }
+
+        /* FAQ */
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1); visibility: hidden; }
+        .faq-item.active .faq-answer { max-height: 400px; padding-top: 1.5rem; visibility: visible; }
+        .faq-item.active i { transform: rotate(180deg); color: #2563EB; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--obsidian); }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
+    </style>
+</head>
+<body class="noise-bg">
+
+    <!-- Ambient Layers -->
+    <header class="absolute top-0 left-0 right-0 z-50 p-6 md:px-12 md:py-8 w-full flex justify-between items-center max-w-7xl mx-auto">
+        <div class="flex items-center gap-3 cursor-pointer group">
+            <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center transform group-hover:scale-105 transition-transform shadow-[0_0_20px_rgba(37,99,235,0.4)]">
+                <div class="w-4 h-4 bg-white rounded-sm transform rotate-45 group-hover:rotate-90 transition-transform duration-500"></div>
+            </div>
+            <span class="font-syne font-bold text-2xl tracking-tight text-white">Lead Studio</span>
+        </div>
+    </header>
+    <div id="bg-glow-1" class="ambient-glow animate-pulse-glow bg-blue-600/10 w-[600px] h-[600px] top-[-10%] left-[-10%]"></div>
+    <div id="bg-glow-2" class="ambient-glow animate-pulse-glow bg-blue-600/5 w-[500px] h-[500px] top-[40%] right-[-10%]" style="animation-delay: -3s;"></div>
+
+    <!-- Sticky Bottom CTA -->
+    <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 p-5 bg-obsidian/98 border-t border-white/5 shadow-2xl backdrop-blur-3xl" aria-hidden="true">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            <div class="hidden md:flex items-center gap-6">
+                <div class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" aria-hidden="true"></div>
+                <p class="font-bold text-base tracking-tight">Available: 5 project slots this week</p>
+            </div>
+            <a href="https://forms.gle/f5BTwn69W1uT1Gbz9" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto px-10 py-4 bg-blue-600 text-white rounded-full font-bold text-center transition-all hover:scale-105 active:scale-95 shadow-xl">
+                Get Landing Page
+            </a>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp -->
+    <a id="floating-whatsapp" href="https://wa.me/918248658302?text=Hi%2C%20I%20want%20a%20landing%20page" target="_blank" rel="noopener noreferrer" aria-label="Chat with Lead Studio on WhatsApp" class="fixed bottom-8 right-6 md:right-12 w-14 h-14 bg-green-600 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-90">
+        <i data-lucide="message-circle" class="text-white w-7 h-7" aria-hidden="true"></i>
+    </a>
+
+    <main>
+        <!-- 01 HERO -->
+        <section class="relative scene-h flex flex-col justify-center items-center px-6 pt-20 overflow-hidden">
+            <div class="max-w-6xl w-full text-center relative z-10">
+                <div class="inline-flex items-center gap-3 px-4 py-1.5 bg-white/5 border border-white/10 rounded-full mb-12 hero-step-1 opacity-0 translate-y-4">
+                    <span class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" aria-hidden="true"></span>
+                    <span class="text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500">5 SLOTS AVAILABLE @ <span class="brand-accent">LEAD STUDIO</span></span>
+                </div>
+                
+                <h1 class="font-syne font-bold tracking-tighter mask-text h-hero mb-12 hero-step-1 opacity-0 translate-y-4" id="hero-headline">
+                    Most websites don’t <br> convert traffic to leads.
+                </h1>
+                
+                <div class="opacity-0 translate-y-4 mb-12" id="hero-step-2">
+                    <h2 class="text-3xl md:text-6xl font-syne font-bold text-blue-600 leading-tight">This one will.</h2>
+                </div>
+
+                <p class="text-secondary p-lead mx-auto font-medium mb-16 hero-step-3 opacity-0 translate-y-4">
+                    <span class="brand-accent">Lead Studio</span> builds landing pages that start bringing enquiries within days.
+                </p>
+
+                <div class="hero-step-3 opacity-0 translate-y-4">
+                    <a href="https://forms.gle/f5BTwn69W1uT1Gbz9" target="_blank" rel="noopener noreferrer" class="px-14 py-6 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold text-xl transition-all transform hover:scale-105 shadow-2xl inline-block">
+                        Get Landing Page
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 REALIZATION (STRICT SEQUENCE) -->
+        <section class="scene-gap px-6 relative bg-obsidian-alt overflow-hidden border-y border-white/5" id="realization-scene">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-blue-600/15 filter blur-[160px] opacity-0" id="realization-bloom"></div>
+            
+            <div class="max-w-7xl mx-auto relative z-10">
+                <!-- STEP 1: DOMINANT HEADLINE -->
+                <div id="realization-headline-container" class="mb-32">
+                    <h2 class="font-syne font-bold h-scene text-center mask-text mx-auto max-w-5xl opacity-0 translate-y-12" id="realization-headline">
+                        Visitors don’t convert because they are confused.
+                    </h2>
+                </div>
+
+                <!-- STEP 2: STAGGERED CARDS -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10" id="realization-cards">
+                    <article class="premium-card p-12 rounded-[2.5rem] realization-card opacity-0">
+                        <h3 class="text-2xl font-bold mb-5">No Direction</h3>
+                        <p class="text-secondary text-base leading-relaxed">If you don't lead the visitor, they will leave in seconds.</p>
+                    </article>
+                    <article class="premium-card p-12 rounded-[2.5rem] realization-card opacity-0">
+                        <h3 class="text-2xl font-bold mb-5">Too Much Fluff</h3>
+                        <p class="text-secondary text-base leading-relaxed">Irrelevant sections dilute your core message and kill sales.</p>
+                    </article>
+                    <article class="premium-card p-12 rounded-[2.5rem] realization-card opacity-0">
+                        <h3 class="text-2xl font-bold mb-5">No Trust</h3>
+                        <p class="text-secondary text-base leading-relaxed">Poor structure makes your business look amateur.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 ROI IMPACT (REFINED & PREMIUM) -->
+        <section class="scene-gap px-6 bg-obsidian relative overflow-hidden" id="roi-scene">
+            <div class="max-w-7xl mx-auto relative z-10">
+                
+                <div class="text-center max-w-4xl mx-auto mb-20 reveal-up">
+                    <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-500 mb-6">Without increasing your traffic</p>
+                    <h2 class="font-syne font-bold h-scene tracking-tighter leading-tight">Same Traffic.<br>Better Results.</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 max-w-6xl mx-auto" id="roi-blocks">
+                    
+                    <!-- Card 1 -->
+                    <div class="premium-card p-8 md:p-10 lg:p-12 rounded-[2rem] text-center roi-block opacity-0 group relative overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-blue-500/30">
+                        <div class="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <p class="text-5xl lg:text-6xl font-syne font-bold text-white mb-4 tracking-tighter whitespace-nowrap inline-flex items-center justify-center relative z-10 w-full">
+                            <i data-lucide="arrow-up" class="w-10 h-10 text-blue-500 mr-2 -mt-1 shrink-0" stroke-width="3"></i>4x
+                        </p>
+                        <p class="text-base lg:text-lg font-medium text-slate-400 tracking-wide relative z-10">Enquiries</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="premium-card p-8 md:p-10 lg:p-12 rounded-[2rem] text-center roi-block opacity-0 group relative overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-blue-500/30 shadow-[0_0_40px_rgba(37,99,235,0.05)] border-blue-500/20">
+                        <div class="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <p class="text-4xl lg:text-5xl font-syne font-bold text-white mb-4 tracking-tighter whitespace-nowrap inline-flex items-center justify-center relative z-10 w-full">
+                            <i data-lucide="arrow-up" class="w-8 h-8 lg:w-10 lg:h-10 text-blue-500 mr-2 -mt-1 shrink-0" stroke-width="3"></i>40% – 70%
+                        </p>
+                        <p class="text-base lg:text-lg font-medium text-slate-400 tracking-wide relative z-10">Conversion Rate</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="premium-card p-10 lg:p-12 rounded-[2rem] text-center roi-block opacity-0 group relative overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-blue-500/30">
+                        <div class="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <p class="text-5xl lg:text-6xl font-syne font-bold text-white mb-4 tracking-tighter whitespace-nowrap inline-flex items-center justify-center relative z-10 w-full">
+                            <i data-lucide="arrow-up" class="w-10 h-10 text-blue-500 mr-2 -mt-1 shrink-0" stroke-width="3"></i>3x
+                        </p>
+                        <p class="text-base lg:text-lg font-medium text-slate-400 tracking-wide relative z-10">WhatsApp Leads</p>
+                    </div>
+
+                </div>
+
+                <div class="text-center reveal-up">
+                    <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Powered by <span class="brand-accent">Lead Studio</span></p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 04 SHIFT -->
+        <section id="pin-section" class="h-screen flex items-center justify-center px-6 overflow-hidden relative bg-obsidian-alt">
+            <div class="max-w-5xl text-center relative z-10">
+                <h2 class="text-2xl md:text-5xl font-medium text-slate-600 font-syne mb-16" id="pin-text-1">A good landing page doesn’t explain everything.</h2>
+                <p class="font-bold font-syne scale-90 opacity-0 mask-text h-scene" id="pin-text-2">It guides ONE decision.</p>
+            </div>
+        </section>
+
+        <!-- 05 SAMPLE WORK -->
+        <section class="scene-gap px-6 bg-obsidian relative overflow-hidden">
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="max-w-2xl reveal-up mb-24">
+                    <h2 class="font-syne font-bold mb-8 h-scene tracking-tighter">Built for action.</h2>
+                    <p class="text-lg text-secondary leading-relaxed">Every design by <span class="brand-accent">Lead Studio</span> is a guided experience engineered for lead generation.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <button class="group float-reveal premium-card interactive p-0 text-left transition-all duration-500 hover:-translate-y-4 hover:shadow-[0_30px_60px_-15px_rgba(37,99,235,0.2)]" onclick="openModal('real-estate')" aria-label="View Real Estate Engine project details">
+                        <div class="aspect-[4/5] rounded-[3rem] overflow-hidden mb-8 w-full relative">
+                            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800&h=1000" width="800" height="1000" alt="Real Estate Property Interior" loading="lazy" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-1000 absolute inset-0">
+                            <!-- Hover Overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                                <div class="translate-y-6 group-hover:translate-y-0 transition-transform duration-500 ease-out flex justify-center">
+                                    <span class="inline-flex items-center gap-2 text-white font-bold bg-blue-600/90 backdrop-blur-md px-5 py-2.5 rounded-full text-xs shadow-xl">
+                                        View Returns <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-2 pb-2">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-blue-500 transition-colors">Real Estate Engine</h3>
+                            <p class="text-secondary text-[10px] font-bold uppercase tracking-widest">40+ Leads in 1 Week</p>
+                        </div>
+                    </button>
+                    
+                    <button class="group float-reveal premium-card interactive p-0 text-left transition-all duration-500 hover:-translate-y-4 hover:shadow-[0_30px_60px_-15px_rgba(37,99,235,0.2)]" onclick="openModal('fitness')" aria-label="View Fitness Accelerator project details">
+                        <div class="aspect-[4/5] rounded-[3rem] overflow-hidden mb-8 w-full relative">
+                            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800&h=1000" width="800" height="1000" alt="Fitness Training Environment" loading="lazy" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-1000 absolute inset-0">
+                            <!-- Hover Overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                                <div class="translate-y-6 group-hover:translate-y-0 transition-transform duration-500 ease-out flex justify-center">
+                                    <span class="inline-flex items-center gap-2 text-white font-bold bg-blue-600/90 backdrop-blur-md px-5 py-2.5 rounded-full text-xs shadow-xl">
+                                        View Returns <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-2 pb-2">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-blue-500 transition-colors">Fitness Accelerator</h3>
+                            <p class="text-secondary text-[10px] font-bold uppercase tracking-widest">3x Direct Bookings</p>
+                        </div>
+                    </button>
+                    
+                    <button class="group float-reveal premium-card interactive p-0 text-left transition-all duration-500 hover:-translate-y-4 hover:shadow-[0_30px_60px_-15px_rgba(37,99,235,0.2)]" onclick="openModal('coaching')" aria-label="View Masterclass Opt-in project details">
+                        <div class="aspect-[4/5] rounded-[3rem] overflow-hidden mb-8 w-full relative">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800&h=1000" width="800" height="1000" alt="Professional Coaching Session" loading="lazy" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-1000 absolute inset-0">
+                            <!-- Hover Overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                                <div class="translate-y-6 group-hover:translate-y-0 transition-transform duration-500 ease-out flex justify-center">
+                                    <span class="inline-flex items-center gap-2 text-white font-bold bg-blue-600/90 backdrop-blur-md px-5 py-2.5 rounded-full text-xs shadow-xl">
+                                        View Case Study <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-2 pb-2">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-blue-500 transition-colors">Masterclass Opt-in</h3>
+                            <p class="text-secondary text-[10px] font-bold uppercase tracking-widest">12.5% Conversion Rate</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06 TESTIMONIALS -->
+        <section class="scene-gap px-6 max-w-7xl mx-auto relative bg-obsidian-alt overflow-hidden rounded-[4rem]">
+            <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-10">
+                <article class="premium-card p-12 rounded-[2.5rem] float-reveal group h-full">
+                    <div class="flex items-center gap-5 mb-10">
+                        <div class="w-14 h-14 rounded-full bg-blue-600/10 flex items-center justify-center font-bold text-blue-600 text-sm" aria-hidden="true">RS</div>
+                        <div>
+                            <p class="font-bold text-white text-base">Rohit Sharma</p>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Founder, GreenRoots (Local Services)</p>
+                        </div>
+                    </div>
+                    <blockquote class="text-xl font-medium mb-10 group-hover:text-blue-500 transition-colors leading-[1.6]">“Simple, fast, and it just worked.”</blockquote>
+                    <div class="mt-auto pt-6 border-t border-white/5">
+                        <p class="text-blue-600 font-bold text-sm tracking-tight">Started getting enquiries within days.</p>
+                    </div>
+                </article>
+                <article class="premium-card p-12 rounded-[2.5rem] float-reveal group h-full">
+                    <div class="flex items-center gap-5 mb-10">
+                        <div class="w-14 h-14 rounded-full bg-blue-600/10 flex items-center justify-center font-bold text-blue-600 text-sm" aria-hidden="true">AN</div>
+                        <div>
+                            <p class="font-bold text-white text-base">Anjali Nair</p>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500">High-Performance Coach</p>
+                        </div>
+                    </div>
+                    <blockquote class="text-xl font-medium mb-10 group-hover:text-blue-500 transition-colors leading-[1.6]">“Exactly what I needed — nothing extra.”</blockquote>
+                    <div class="mt-auto pt-6 border-t border-white/5">
+                        <p class="text-blue-600 font-bold text-sm tracking-tight">3x higher direct opt-in rate.</p>
+                    </div>
+                </article>
+                <article class="premium-card p-12 rounded-[2.5rem] float-reveal group h-full">
+                    <div class="flex items-center gap-5 mb-10">
+                        <div class="w-14 h-14 rounded-full bg-blue-600/10 flex items-center justify-center font-bold text-blue-600 text-sm" aria-hidden="true">VS</div>
+                        <div>
+                            <p class="font-bold text-white text-base">Vikram Singh</p>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Principal Agent, Urban Realty</p>
+                        </div>
+                    </div>
+                    <blockquote class="text-xl font-medium mb-10 group-hover:text-blue-500 transition-colors leading-[1.6]">“Built for action, not just design.”</blockquote>
+                    <div class="mt-auto pt-6 border-t border-white/5">
+                        <p class="text-blue-600 font-bold text-sm tracking-tight">Converted 40+ cold leads in week 1.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 07 OFFER -->
+        <section class="scene-gap px-6 bg-obsidian relative overflow-hidden">
+            <div class="max-w-5xl mx-auto premium-card rounded-[4rem] p-8 md:p-16 lg:p-24 relative overflow-hidden offer-reveal z-10">
+                <div class="absolute top-0 right-0 bg-blue-600 px-10 py-3 rounded-bl-[2.5rem] font-bold text-[9px] uppercase tracking-[0.4em]">5 SLOTS AVAILABLE</div>
+                <div class="grid md:grid-cols-2 gap-20">
+                    <div>
+                        <h2 class="text-4xl font-syne font-bold mb-10 tracking-tighter">Lead Page Starter</h2>
+                        <div class="mb-16">
+                            <p class="text-6xl font-bold mb-4 tracking-tighter">₹3k – ₹5k</p>
+                            <p class="text-blue-600 font-bold flex items-center gap-3 text-lg tracking-wide"><i data-lucide="clock" class="w-6 h-6" aria-hidden="true"></i> 2–3 Day Delivery</p>
+                        </div>
+                        <a href="https://forms.gle/f5BTwn69W1uT1Gbz9" target="_blank" rel="noopener noreferrer" class="w-full py-6 bg-blue-600 text-white rounded-2xl font-bold text-2xl text-center shadow-2xl block transition-all hover:scale-105">Get My Landing Page</a>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <h3 class="text-[10px] font-bold text-slate-600 uppercase tracking-[0.3em] mb-8">The Package:</h3>
+                        <ul class="space-y-6" role="list">
+                            <li class="flex gap-5 text-lg font-medium items-center"><i data-lucide="check" class="text-blue-600 w-6 h-6 shrink-0" aria-hidden="true"></i> High-conversion copy structure</li>
+                            <li class="flex gap-5 text-lg font-medium items-center"><i data-lucide="check" class="text-blue-600 w-6 h-6 shrink-0" aria-hidden="true"></i> Ultra-fast mobile layout</li>
+                            <li class="flex gap-5 text-lg font-medium items-center"><i data-lucide="check" class="text-blue-600 w-6 h-6 shrink-0" aria-hidden="true"></i> Form + WhatsApp integration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 08 TRANSITION -->
+        <section class="scene-gap flex items-center justify-center text-center reveal-up px-6 bg-obsidian-alt relative overflow-hidden">
+            <div class="ambient-glow bg-blue-600/15 w-full h-full top-0 left-0 opacity-40"></div>
+            <h2 class="font-syne font-bold mask-text h-scene tracking-tighter leading-tight flex items-center justify-center relative z-10">Clarity works.<br> Now it’s your turn.</h2>
+        </section>
+
+        <!-- 09 FINAL CTA -->
+        <section class="scene-gap flex flex-col justify-center items-center px-6 text-center bg-obsidian relative overflow-hidden">
+            <div class="max-w-5xl mx-auto relative z-10 py-40">
+                <h2 class="font-syne font-bold mb-20 mask-text h-scene tracking-tighter reveal-up leading-none">Stop losing visitors.</h2>
+                <div class="reveal-up flex flex-col items-center gap-12">
+                    <a href="https://forms.gle/f5BTwn69W1uT1Gbz9" target="_blank" rel="noopener noreferrer" class="px-20 py-8 bg-blue-600 text-white rounded-[2rem] font-bold text-3xl shadow-2xl hover:scale-105 transition-all">Fix My Landing Page</a>
+                    <p class="text-secondary text-xl tracking-wide">Ready to start? <span class="brand-accent">Lead Studio</span> is ready.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10 FAQ (A11y Upgraded) -->
+        <section class="scene-gap px-6 max-w-4xl mx-auto bg-obsidian-alt relative rounded-t-[4rem]" aria-labelledby="faq-heading">
+            <h2 id="faq-heading" class="font-syne font-bold mb-24 text-center reveal-up text-3xl tracking-tighter">FAQ</h2>
+            <div class="space-y-12">
+                <div class="faq-item border-b border-white/10 pb-12 reveal-up group">
+                    <button class="flex justify-between items-center gap-8 w-full" aria-expanded="false" aria-controls="faq-1" onclick="toggleFaq(0, this)">
+                        <span class="text-xl md:text-2xl font-bold group-hover:text-blue-500 transition-colors tracking-tight text-left">How fast can I get my landing page?</span>
+                        <i data-lucide="chevron-down" class="transition-transform duration-500 text-slate-600 w-7 h-7" aria-hidden="true"></i>
+                    </button>
+                    <div id="faq-1" class="faq-answer"><p class="text-secondary text-lg leading-relaxed mt-4">Usually within 2–3 days once business details are provided.</p></div>
+                </div>
+                <div class="faq-item border-b border-white/10 pb-12 reveal-up group">
+                    <button class="flex justify-between items-center gap-8 w-full" aria-expanded="false" aria-controls="faq-2" onclick="toggleFaq(1, this)">
+                        <span class="text-xl md:text-2xl font-bold group-hover:text-blue-500 transition-colors tracking-tight text-left">What if I don’t have content ready?</span>
+                        <i data-lucide="chevron-down" class="transition-transform duration-500 text-slate-600 w-7 h-7" aria-hidden="true"></i>
+                    </button>
+                    <div id="faq-2" class="faq-answer"><p class="text-secondary text-lg leading-relaxed mt-4">That’s perfectly fine. I’ll guide you through a simple set of questions and structure all the copy for you.</p></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="pt-40 pb-64 border-t border-white/5 text-center text-slate-700 text-[9px] px-6 bg-obsidian">
+        <p class="mb-6 text-slate-600 tracking-[0.4em] uppercase font-bold">Engineered by <span class="brand-accent">Lead Studio</span></p>
+        <p class="opacity-40">&copy; 2026 Lead Studio. All rights reserved.</p>
+    </footer>
+
+    <!-- MODAL (A11y Compliant) -->
+    <div id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" class="modal fixed inset-0 flex items-center justify-center px-6 invisible z-[10001]">
+        <div class="absolute inset-0 bg-black/98 backdrop-blur-3xl" onclick="closeModal()" aria-hidden="true"></div>
+        <div class="premium-card max-w-5xl w-full rounded-[4rem] p-6 md:p-12 lg:p-20 relative z-10 modal-content overflow-y-auto max-h-[90vh] opacity-0 translate-y-10 transition-all duration-500" tabindex="-1">
+            <button onclick="closeModal()" id="modal-close-btn" class="absolute top-6 right-6 md:top-10 md:right-10 text-white hover:rotate-90 transition-transform" aria-label="Close modal">
+                <i data-lucide="x" class="w-10 h-10" aria-hidden="true"></i>
+            </button>
+            <div id="modal-inner-content" class="grid md:grid-cols-2 gap-20"></div>
+        </div>
+    </div>
+
+    <script>
+        // INIT
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+        
+        window.addEventListener('load', () => {
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                initAnimations();
+            }
+        });
+
+        // GLOBAL FOCUS TRAP STATE
+        let lastFocusedElement;
+
+        function initAnimations() {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // SEQUENCED REALIZATION SCENE (STRICT HIERARCHY)
+            const realTl = gsap.timeline({
+                scrollTrigger: { trigger: "#realization-scene", start: "top 75%", toggleActions: "play none none none" }
+            });
+
+            // Step 1: Ambient Bloom and Headline appear immediately
+            realTl.to("#realization-bloom", { opacity: 0.5, duration: 1.5, ease: "power2.out" })
+                  .to("#realization-headline", { opacity: 1, y: 0, duration: 1.2, ease: "power4.out" }, "<")
+                  // Quick cognitive pause before revealing cards
+                  .fromTo(".realization-card", 
+                      { opacity: 0, y: 40 }, 
+                      { opacity: 1, y: 0, stagger: 0.15, duration: 0.8, ease: "power3.out" }, 
+                      "+=0.3"
+                  );
+
+            // ROI SCENE (BRUTALIST)
+            gsap.fromTo(".roi-block", 
+                { opacity: 0, scale: 0.9, y: 30 }, 
+                { opacity: 1, scale: 1, y: 0, stagger: 0.2, duration: 1.2, ease: "power4.out", 
+                  scrollTrigger: { trigger: "#roi-blocks", start: "top 80%" } 
+                }
+            );
+
+            // Hero Sequence - STRICT STORYTELLING SYNC
+            const heroTl = gsap.timeline({ delay: 0.1 });
+            heroTl.to(".hero-step-1", { opacity: 1, y: 0, stagger: 0.2, duration: 1.2, ease: "power4.out" })
+                  .to("#hero-step-2", { opacity: 1, y: 0, duration: 1.2, ease: "power4.out" }, "+=0.3") // Pause for impact before the answer
+                  .to(".hero-step-3", { opacity: 1, y: 0, stagger: 0.2, duration: 1.2, ease: "power4.out" }, "+=0.3"); // Then reveal the explanation & CTA
+
+            // Split Words
+            document.querySelectorAll('.split-words').forEach(heading => {
+                const words = heading.textContent.split(' ');
+                heading.innerHTML = words.map(word => `<span class="inline-block opacity-0 translate-y-8 blur-xl">${word}</span>`).join(' ');
+                gsap.to(heading.querySelectorAll('span'), {
+                    opacity: 1, y: 0, filter: "blur(0px)", stagger: 0.1, duration: 1.2, ease: "power3.out",
+                    scrollTrigger: { trigger: heading, start: "top 92%" }
+                });
+            });
+
+            function forceReveal(elements) {
+                elements.forEach(el => {
+                    gsap.set(el, { opacity: 0, y: 30 });
+                    ScrollTrigger.create({
+                        trigger: el, start: "top 92%",
+                        onEnter: () => gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: "power3.out" }),
+                        onEnterBack: () => gsap.to(el, { opacity: 1, y: 0, duration: 0.5 })
+                    });
+                });
+            }
+
+            forceReveal(document.querySelectorAll('.reveal-up'));
+            forceReveal(document.querySelectorAll('.float-reveal'));
+
+            // Pin Scene
+            const pinTl = gsap.timeline({ scrollTrigger: { trigger: "#pin-section", start: "top top", end: "+=150%", pin: true, scrub: 1.5 } });
+            pinTl.to("#pin-text-1", { opacity: 0, y: -40, duration: 1 })
+                 .to("#pin-text-2", { opacity: 1, scale: 1, duration: 2 }, "-=0.5");
+
+            // Offer Reveal
+            gsap.from(".offer-reveal", {
+                opacity: 0, y: 60, scale: 0.95, duration: 1.5, ease: "power3.out",
+                scrollTrigger: { trigger: ".offer-reveal", start: "top 95%" }
+            });
+        }
+
+        // FAQ Toggle (A11y Compliant)
+        function toggleFaq(index, btnElement) {
+            const items = document.querySelectorAll('.faq-item');
+            const buttons = document.querySelectorAll('.faq-item button');
+            
+            items.forEach((item, i) => {
+                if (i === index) {
+                    const isActive = item.classList.contains('active');
+                    if (isActive) {
+                        item.classList.remove('active');
+                        buttons[i].setAttribute('aria-expanded', 'false');
+                    } else {
+                        item.classList.add('active');
+                        buttons[i].setAttribute('aria-expanded', 'true');
+                    }
+                } else {
+                    item.classList.remove('active');
+                    buttons[i].setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
+        // Sticky Logic
+        const stickyCta = document.getElementById('sticky-cta');
+        const whatsapp = document.getElementById('floating-whatsapp');
+        let stickyActive = false;
+
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            if (scrollPercent > 12) {
+                if (!stickyActive) {
+                    stickyCta.classList.add('visible');
+                    whatsapp.classList.add('cta-active');
+                    stickyActive = true;
+                    stickyCta.setAttribute('aria-hidden', 'false');
+                }
+            } else {
+                stickyCta.classList.remove('visible');
+                whatsapp.classList.remove('cta-active');
+                stickyActive = false;
+                stickyCta.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+        // Modal Logic
+        const modalData = {
+            'real-estate': { title: "Real Estate Engine", kpi: "40+ Leads", img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800" },
+            'fitness': { title: "Fitness Accelerator", kpi: "3x Bookings", img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800" },
+            'coaching': { title: "Masterclass Opt-in", kpi: "12.5% Opt-in", img: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800" }
+        };
+
+        function openModal(id) {
+            lastFocusedElement = document.activeElement; // Store focus
+            const data = modalData[id];
+            const modal = document.getElementById('project-modal');
+            const content = modal.querySelector('.modal-content');
+            
+            document.getElementById('modal-inner-content').innerHTML = `
+                <div class="rounded-[3rem] overflow-hidden aspect-[4/5]"><img src="${data.img}" alt="${data.title}" class="w-full h-full object-cover"></div>
+                <div class="flex flex-col justify-center">
+                    <h3 id="modal-title" class="text-4xl font-syne font-bold mb-8 tracking-tighter">${data.title}</h3>
+                    <p class="text-secondary text-xl mb-10 leading-relaxed">Built for speed and conversion.</p>
+                    <div class="p-10 bg-blue-600/10 border border-blue-600/20 rounded-[2.5rem] mb-10"><p class="text-3xl font-bold text-white">${data.kpi}</p></div>
+                    <a href="https://forms.gle/f5BTwn69W1uT1Gbz9" target="_blank" rel="noopener noreferrer" class="w-full py-6 bg-blue-600 text-white rounded-2xl font-bold text-xl text-center focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-obsidian">Start Project</a>
+                </div>`;
+            
+            modal.classList.remove('invisible');
+            setTimeout(() => {
+                content.classList.remove('opacity-0', 'translate-y-10');
+                document.getElementById('modal-close-btn').focus(); // Trap focus inside modal
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('project-modal');
+            const content = modal.querySelector('.modal-content');
+            content.classList.add('opacity-0', 'translate-y-10');
+            setTimeout(() => { 
+                modal.classList.add('invisible'); 
+                document.body.style.overflow = 'auto'; 
+                if (lastFocusedElement) lastFocusedElement.focus(); // Return focus
+            }, 500);
+        }
+
+        document.addEventListener('keydown', (e) => { 
+            if (e.key === 'Escape' && !document.getElementById('project-modal').classList.contains('invisible')) {
+                closeModal(); 
+            }
+        });
+    </script>
+</body>
+</html>
