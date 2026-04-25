@@ -2,21 +2,24 @@
 
 @theme {
   --font-sans: var(--font-inter);
+  --font-mono: var(--font-mono);
   --font-syne: var(--font-syne);
-  --color-brand: #2563EB;
-  --color-obsidian: #0A0A0A;
-  --color-slate-muted: #64748B;
+  
+  --color-brand: #10B981; /* Tech Emerald */
+  --color-obsidian: #1C1917; /* Tech Black */
+  --color-beige-light: #F5F5F4;
+  --color-beige-dark: #E7E5E4;
+  --color-slate-muted: #78716c;
 }
 
 @custom-variant hover (&:hover);
 
-
 :root {
-  --background: #0A0A0A;
-  --foreground: #FFFFFF;
-  --brand: #2563EB;
-  --brand-glow: rgba(37, 99, 235, 0.15);
+  --background: #F5F5F4;
+  --foreground: #1C1917;
+  --brand: #10B981;
 }
+
 
 @layer base {
   html {
@@ -24,7 +27,7 @@
   }
   
   body {
-    @apply bg-obsidian text-white antialiased;
+    @apply bg-beige-light text-obsidian antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     overflow-x: hidden;
   }
@@ -41,16 +44,24 @@
   }
   
   .glow-mesh {
-    background: radial-gradient(circle at 50% 50%, var(--brand-glow) 0%, transparent 100%);
+    background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.05) 0%, transparent 100%);
+  }
+
+  .brutalist-shadow {
+    box-shadow: 4px 4px 0px 0px #1C1917;
+  }
+
+  .brutalist-shadow-lg {
+    box-shadow: 8px 8px 0px 0px #1C1917;
   }
 
   .premium-card {
-    @apply bg-white/[0.03] border border-white/10 backdrop-blur-md transition-all duration-500;
+    @apply bg-white border border-stone-300 transition-all duration-500 brutalist-shadow;
   }
 
   .premium-card:hover {
-    @apply bg-white/[0.06] border-white/20 -translate-y-2;
-    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.8);
+    @apply border-brand -translate-y-1;
+    box-shadow: 6px 6px 0px 0px #1C1917;
   }
 
   .mask-text {

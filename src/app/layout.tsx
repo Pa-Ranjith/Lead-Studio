@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Syne } from "next/font/google";
+import { Inter, Syne, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
@@ -12,6 +12,12 @@ const syne = Syne({
   subsets: ["latin"],
   variable: "--font-syne",
 });
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
+
 
 export const metadata: Metadata = {
   title: "B2B Lead Generation Agency | Qualified Leads in 30 Days | Leads Studio",
@@ -80,7 +86,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${syne.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${syne.variable} ${mono.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>

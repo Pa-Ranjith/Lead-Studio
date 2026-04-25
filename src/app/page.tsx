@@ -23,7 +23,7 @@ const RevealText = ({ children, delay = 0, className = "" }: { children: React.R
 );
 
 const Section = ({ children, className = "", id = "" }: { children: React.ReactNode, className?: string, id?: string }) => (
-  <section id={id} className={`min-h-screen flex flex-col justify-center px-6 md:px-24 py-20 relative overflow-hidden ${className}`}>
+  <section id={id} className={`py-24 px-6 md:px-24 relative overflow-hidden border-b border-stone-300 ${className}`}>
     {children}
   </section>
 );
@@ -33,12 +33,25 @@ const Section = ({ children, className = "", id = "" }: { children: React.ReactN
 export default function LandingPage() {
   const { scrollYProgress } = useScroll();
   const [mounted, setMounted] = useState(false);
+  const [terminalText, setTerminalText] = useState("");
+  const [showOutput, setShowOutput] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    const fullText = "initiate lead_capture";
+    let i = 0;
+    const interval = setInterval(() => {
+      setTerminalText(fullText.substring(0, i + 1));
+      i++;
+      if (i === fullText.length) {
+        clearInterval(interval);
+        setTimeout(() => setShowOutput(true), 500);
+      }
+    }, 80);
+    return () => clearInterval(interval);
   }, []);
 
-  if (!mounted) return <div className="bg-obsidian min-h-screen" />;
+  if (!mounted) return <div className="bg-beige-light min-h-screen" />;
 
   const faqData = [
     {
@@ -52,7 +65,7 @@ export default function LandingPage() {
   ];
 
   return (
-    <main className="bg-obsidian text-white selection:bg-brand selection:text-white">
+    <main className="bg-beige-light text-obsidian selection:bg-brand selection:text-white">
       <Navbar />
       
       {/* FAQ Schema */}
@@ -74,265 +87,287 @@ export default function LandingPage() {
         }}
       />
 
-      {/* Scroll Progress Bar */}
-      <motion.div 
-        className="fixed top-0 left-0 right-0 h-1 bg-brand origin-left z-50"
-        style={{ scaleX: scrollYProgress }}
-      />
-
       {/* 1. HERO SECTION */}
-      <Section className="items-center text-center">
-        <div className="glow-mesh absolute inset-0 opacity-30" />
-        
-        <div className="relative z-10 max-w-4xl">
-          <motion.h1 
-            className="text-5xl md:text-8xl font-bold tracking-tighter mask-text leading-[1.1] font-syne"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            B2B Lead Generation <br/> Done for You.
-          </motion.h1>
-          
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5, duration: 1 }}
-            className="mt-4"
-          >
-            <h2 className="text-3xl md:text-6xl font-bold text-brand font-syne">
-              Qualified Leads in 30 Days.
-            </h2>
-          </motion.div>
+      <Section className="bg-beige-dark/30">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          <div className="relative z-10">
+            <motion.h1 
+              className="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1] font-mono uppercase mb-6"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              Most websites don't <br/> <span className="text-brand">Bring Enquiries.</span>
+            </motion.h1>
+            
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 1 }}
+              className="mb-8"
+            >
+              <h2 className="text-3xl md:text-5xl font-bold text-obsidian font-mono uppercase tracking-tighter">
+                This one will.
+              </h2>
+            </motion.div>
 
-          <RevealText delay={2} className="mt-8">
-            <p className="text-xl md:text-2xl text-slate-muted max-w-2xl mx-auto">
-              Most websites are static billboards. Lead Studio builds focused landing pages and outbound systems engineered to drive action and generate revenue.
-            </p>
-          </RevealText>
+            <RevealText delay={0.8} className="mt-8">
+              <p className="text-xl md:text-2xl text-stone-600 max-w-lg leading-relaxed font-sans mb-10">
+                Lead Studio builds focused landing pages engineered to drive action and generate enquiries within days.
+              </p>
+            </RevealText>
 
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 0.8 }}
+            >
+              <Link href="/contact" className="bg-obsidian text-white px-10 py-5 font-mono font-bold text-xl flex items-center justify-center group hover:bg-stone-800 transition-colors brutalist-shadow">
+                GET LANDING PAGE
+                <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform" />
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Terminal Visual */}
           <motion.div 
-            className="mt-12 flex flex-col md:flex-row gap-4 justify-center items-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.5, duration: 0.8 }}
+            className="relative"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 1 }}
           >
-            <Link href="/contact" className="px-8 py-4 bg-brand text-white rounded-full font-bold text-lg hover:scale-105 transition-transform flex items-center gap-2 group">
-              Get Started
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link href="/services" className="px-8 py-4 border border-white/10 rounded-full font-bold text-lg hover:bg-white/5 transition-colors">
-              Our Process
-            </Link>
+            <div className="bg-[#111] rounded-sm overflow-hidden font-mono text-sm text-stone-300 shadow-2xl border border-stone-800">
+              <div className="h-8 bg-stone-800 flex items-center justify-center relative border-b border-stone-700">
+                <div className="absolute left-3 flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
+                </div>
+                <span className="text-[10px] text-stone-500 uppercase tracking-widest font-bold">bash — lead-engine</span>
+              </div>
+              <div className="p-8 h-[360px] overflow-hidden">
+                <div className="flex">
+                  <span className="text-brand mr-3">$</span>
+                  <span className="text-white border-r-2 border-brand pr-1">{terminalText}</span>
+                </div>
+                <AnimatePresence>
+                  {showOutput && (
+                    <motion.div 
+                      className="mt-6 space-y-3"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                    >
+                      <div className="text-stone-500">• Analyzing traffic flow...</div>
+                      <div className="text-white flex justify-between"><span>visitor_01:arrived</span><span className="text-brand font-bold">CAPTURED (120ms)</span></div>
+                      <div className="text-white flex justify-between"><span>visitor_02:bounced</span><span className="text-red-400 font-bold">PREVENTED (45ms)</span></div>
+                      <div className="text-white flex justify-between"><span>visitor_03:engaged</span><span className="text-brand font-bold">CONVERTED (82ms)</span></div>
+                      <motion.div 
+                        className="mt-8 text-brand font-bold text-lg"
+                        initial={{ scale: 0.8 }}
+                        animate={{ scale: 1 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                      >
+                        {">>> Enquiries Generated: +3"}
+                      </motion.div>
+                      <div className="mt-4 text-stone-500 italic">// System optimized for high-intent action</div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+            {/* Accents */}
+            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-brand/10 border border-brand/20 -z-10"></div>
+            <div className="absolute -top-4 -left-4 w-16 h-16 bg-obsidian/5 border border-obsidian/10 -z-10"></div>
           </motion.div>
         </div>
       </Section>
 
-      {/* 2. REALIZATION SECTION - Content Expansion */}
-      <Section className="items-center">
+
+      {/* 2. REALIZATION SECTION */}
+      <Section className="items-center bg-white">
         <div className="max-w-4xl text-center">
-          <RevealText className="text-4xl md:text-7xl font-bold mb-10 leading-tight font-syne">
-            B2B Lead Generation Services <br/> <span className="text-slate-muted italic text-3xl block mt-4">Built for Revenue, Not Just Traffic.</span>
+          <RevealText className="text-4xl md:text-6xl font-bold mb-10 leading-tight font-mono uppercase tracking-tighter">
+            Visitors don't convert <br/> <span className="text-stone-500">because they're confused.</span>
           </RevealText>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mb-20">
             {[
-              { title: "No Direction", desc: "Most sites confuse visitors with too many options. We guide them toward a single high-value enquiry." },
-              { title: "Zero Intent", desc: "Traffic without intent is a vanity metric. We filter for qualified leads that actually have a budget." },
-              { title: "Broken Funnels", desc: "If your landing page doesn't sync with your outreach, you lose trust. We build unified sales funnels." }
+              { title: "No Direction", desc: "If you don't lead the visitor, they will leave in seconds.", id: "01" },
+              { title: "Zero Intent", desc: "Traffic without intent is a vanity metric. We filter for qualified leads.", id: "02" },
+              { title: "Broken Funnels", desc: "If your page doesn't sync with your outreach, you lose trust.", id: "03" }
             ].map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 * i, duration: 0.8 }}
-                className="space-y-4"
+                className="premium-card p-10 group"
               >
-                <div className="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center">
-                  <div className="w-2 h-2 bg-brand rounded-full" />
+                <div className="w-12 h-12 bg-obsidian text-white flex items-center justify-center font-mono font-bold mb-8 group-hover:bg-brand transition-colors text-lg">
+                  {item.id}
                 </div>
-                <h3 className="text-2xl font-bold uppercase tracking-tight">{item.title}</h3>
-                <p className="text-slate-muted text-lg leading-relaxed">{item.desc}</p>
+                <h3 className="text-xl font-bold font-mono uppercase tracking-tight mb-4">{item.title}</h3>
+                <p className="text-stone-600 text-lg leading-relaxed font-sans">{item.desc}</p>
               </motion.div>
             ))}
-          </div>
-
-          <div className="max-w-2xl mx-auto text-left bg-white/5 p-8 rounded-3xl border border-white/10">
-            <h3 className="text-2xl font-bold mb-4 text-brand">Why Outbound Lead Gen?</h3>
-            <p className="text-slate-muted text-lg leading-relaxed">
-              Inbound marketing takes months. Our **Outbound Lead Generation System** bypasses the wait by putting your offer directly in front of decision-makers. We combine laser-focused ICP (Ideal Customer Profile) data with conversion-optimized pages to deliver results in weeks, not years.
-            </p>
           </div>
         </div>
       </Section>
 
-      {/* 3. SHIFT SECTION */}
-      <Section className="items-center text-center bg-brand/5">
-        <div className="max-w-3xl space-y-12">
-          <RevealText className="text-3xl md:text-5xl font-medium text-slate-muted font-syne">
+      {/* 3. ROI SECTION */}
+      <Section className="bg-obsidian text-white text-center py-32">
+        <div className="max-w-7xl mx-auto">
+          <RevealText className="text-4xl md:text-7xl font-bold font-mono uppercase tracking-tighter mb-20">
+            Same Traffic. <br/> <span className="text-brand">Better Results.</span>
+          </RevealText>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 border-t border-stone-800 pt-20">
+            {[
+              { val: "4x", label: "Enquiries", accent: "↑" },
+              { val: "40-70%", label: "Conversion Rate" },
+              { val: "3x", label: "WhatsApp Leads", accent: "↑" }
+            ].map((stat, i) => (
+              <motion.div key={i} className="space-y-4">
+                <div className="text-6xl md:text-8xl font-bold font-mono tracking-tighter flex justify-center items-center gap-2">
+                  {stat.accent && <span className="text-brand text-4xl">{stat.accent}</span>}
+                  {stat.val}
+                </div>
+                <div className="text-stone-500 font-mono text-sm font-bold uppercase tracking-widest">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* 4. SHIFT SECTION */}
+      <Section className="items-center text-center bg-beige-dark/20">
+        <div className="max-w-4xl space-y-12">
+          <RevealText className="text-3xl md:text-5xl font-bold font-sans tracking-tight text-stone-800 leading-tight">
             A good landing page doesn’t explain everything.
           </RevealText>
-          <RevealText delay={0.4} className="text-5xl md:text-8xl font-bold font-syne uppercase tracking-tighter">
-            It guides ONE decision.
-          </RevealText>
-        </div>
-      </Section>
-
-      {/* 4. SOLUTION SECTION - Expansion */}
-      <Section className="items-start">
-        <div className="max-w-4xl space-y-20">
-          <RevealText className="text-4xl md:text-6xl font-bold font-syne">
-            How Our Lead Generation <br/> System Works:
-          </RevealText>
-          
-          <div className="space-y-12 w-full">
-            {[
-              { icon: <MousePointer2 />, title: "Precision ICP Targeting", desc: "We identify your ideal customer profile using real-time market data, ensuring every visitor is a potential high-value client." },
-              { icon: <Zap />, title: "High-Conversion Messaging", desc: "We strip away the fluff. Our landing pages focus on one pain point and one primary solution — yours." },
-              { icon: <CheckCircle2 />, title: "Frictionless Conversion", desc: "From WhatsApp integration to optimized forms, we make it effortless for prospects to say 'Yes'." }
-            ].map((item, i) => (
-              <motion.div 
-                key={i}
-                className="flex items-start gap-8 group"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.2 }}
-              >
-                <div className="mt-1 p-4 bg-brand/10 text-brand rounded-2xl group-hover:bg-brand group-hover:text-white transition-colors duration-500">
-                  {item.icon}
-                </div>
-                <div>
-                  <h3 className="text-3xl font-bold mb-2">{item.title}</h3>
-                  <p className="text-xl text-slate-muted leading-relaxed">{item.desc}</p>
-                </div>
-              </motion.div>
-            ))}
+          <div className="inline-block bg-obsidian px-10 py-6 brutalist-shadow">
+            <RevealText delay={0.4} className="text-2xl md:text-4xl font-mono font-bold text-brand uppercase tracking-widest">
+              It guides ONE decision.
+            </RevealText>
           </div>
         </div>
       </Section>
 
-      {/* 5. OFFER SECTION */}
-      <Section id="pricing" className="items-center">
-        <div className="text-center mb-16">
-          <RevealText className="text-4xl md:text-6xl font-bold mb-4 font-syne">Built for Conversion.</RevealText>
-          <RevealText className="text-xl text-slate-muted">Simple, productized pricing for founders and small businesses.</RevealText>
+      {/* 5. OFFER / PRICING SECTION */}
+      <Section id="pricing" className="items-center bg-white">
+        <div className="text-center mb-20">
+          <RevealText className="text-4xl md:text-6xl font-bold mb-6 font-mono uppercase tracking-tighter">Built for Action</RevealText>
+          <RevealText className="text-xl text-stone-600 max-w-2xl mx-auto">Productized landing pages designed to generate revenue, not just look good.</RevealText>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 w-full max-w-7xl">
           {[
             { 
               name: "Starter", price: "39", tagline: "Quick validation", 
-              features: ["1 Section (Hero + CTA)", "WhatsApp integration", "2-Day delivery"],
+              features: ["1 High-converting section", "Basic copy structuring", "WhatsApp integration", "2-Day delivery"],
               cta: "Launch My Page"
             },
             { 
-              name: "Core", price: "149", tagline: "Lead-ready page", highlight: true,
-              features: ["Full page (5-6 sections)", "Form + WhatsApp", "SEO Optimized", "3-4 Day delivery"],
+              name: "Core", price: "149", tagline: "Lead-ready page", highlight: true, badge: "Most Popular",
+              features: ["Full page (5-6 sections)", "Problem/Solution/FAQ", "WhatsApp + Form", "3-4 Day delivery"],
               cta: "Get Started"
             },
             { 
               name: "Pro", price: "399", tagline: "Growth optimized", 
-              features: ["Everything in Core", "Analytics setup", "Refined messaging", "2-3 Day priority"],
+              features: ["Everything in Core", "Analytics setup (GA4)", "Refined messaging", "2-3 Day priority"],
               cta: "Upgrade Now"
             }
           ].map((tier, i) => (
             <motion.div 
               key={i}
-              className={`relative flex flex-col p-8 rounded-[2.5rem] border transition-all duration-500 ${
+              className={`relative flex flex-col p-10 rounded-none border-2 transition-all duration-500 ${
                 tier.highlight 
-                ? "bg-brand/5 border-brand shadow-[0_0_40px_-10px_rgba(16,185,129,0.2)] scale-105 z-10" 
-                : "bg-white/5 border-white/10"
+                ? "bg-white border-brand brutalist-shadow-lg scale-105 z-10" 
+                : "bg-white border-obsidian brutalist-shadow"
               }`}
               whileHover={{ y: -5 }}
             >
-              {tier.highlight && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
-                  Most Popular
+              {tier.badge && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand text-white px-6 py-1 rounded-none text-xs font-bold uppercase tracking-widest shadow-[4px_4px_0px_0px_rgba(28,25,23,1)]">
+                  {tier.badge}
                 </div>
               )}
-              <h3 className="text-brand font-bold uppercase tracking-widest text-xs mb-4">{tier.name}</h3>
-              <div className="flex items-baseline gap-1 mb-2">
+              <h3 className="text-stone-500 font-mono font-bold uppercase tracking-widest text-xs mb-8">{tier.name}</h3>
+              <div className="flex items-baseline gap-1 mb-4">
                 <span className="text-3xl font-bold">$</span>
-                <span className="text-6xl font-bold">{tier.price}</span>
+                <span className="text-7xl font-bold font-mono tracking-tight">{tier.price}</span>
               </div>
-              <p className="text-lg font-bold mb-6">{tier.tagline}</p>
-              <ul className="space-y-4 mb-8 flex-grow">
+              <p className="text-xl font-bold mb-8 font-sans">{tier.tagline}</p>
+              <ul className="space-y-6 mb-12 flex-grow border-t border-stone-100 pt-8">
                 {tier.features.map((feat, idx) => (
-                  <li key={idx} className="flex items-center gap-3 text-sm">
-                    <CheckCircle2 className="text-brand w-4 h-4 shrink-0" />
+                  <li key={idx} className="flex items-start gap-4 text-sm font-medium">
+                    <CheckCircle2 className="text-brand w-5 h-5 shrink-0" />
                     {feat}
                   </li>
                 ))}
               </ul>
-              <Link href="/pricing" className={`block w-full py-4 rounded-xl text-center font-bold transition-all ${
-                tier.highlight ? "bg-brand text-white" : "bg-white text-obsidian hover:bg-brand hover:text-white"
+              <Link href="/pricing" className={`block w-full py-5 rounded-none text-center font-mono font-bold text-lg transition-all ${
+                tier.highlight ? "bg-brand text-white shadow-[4px_4px_0px_0px_rgba(28,25,23,1)]" : "bg-obsidian text-white"
               }`}>
                 {tier.cta}
               </Link>
             </motion.div>
           ))}
         </div>
-        
-        <div className="mt-12 flex items-center gap-8 opacity-40 text-xs font-bold uppercase tracking-widest">
-          <span>No contracts</span>
-          <span>Fast delivery</span>
-          <span>Built for conversion</span>
-        </div>
       </Section>
 
       {/* 6. SAMPLE WORK SECTION */}
-      <Section className="items-center">
-        <RevealText className="text-4xl md:text-6xl font-bold mb-20 text-center font-syne">Built for <span className="text-brand">Action</span></RevealText>
+      <Section className="items-center bg-beige-light">
+        <RevealText className="text-4xl md:text-6xl font-bold mb-20 text-center font-mono uppercase tracking-tighter">Built for <span className="text-brand">Action</span></RevealText>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full">
           {[
-            { label: "Real Estate Engine", image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=600", alt: "B2B lead generation for Real Estate using focused landing pages" },
-            { label: "Fitness Accelerator", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=600", alt: "Lead acquisition dashboard for fitness coaching business" },
-            { label: "Coaching Opt-in", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600", alt: "Conversion-optimized landing page for high-ticket coaching" }
+            { label: "Real Estate Engine", image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=600", stats: "40+ Leads in 1 Week" },
+            { label: "Fitness Accelerator", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=600", stats: "3x Direct Bookings" },
+            { label: "Coaching Opt-in", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600", stats: "12.5% Conversion Rate" }
           ].map((item, i) => (
             <motion.div 
               key={i}
-              className="relative aspect-[3/4] rounded-3xl overflow-hidden group cursor-pointer"
+              className="bg-white p-4 border border-stone-300 brutalist-shadow group cursor-pointer"
               whileHover={{ y: -10 }}
             >
-              <img 
-                src={item.image} 
-                alt={item.alt}
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-60 group-hover:opacity-90 transition-opacity" />
-              <div className="absolute inset-0 flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                <h4 className="text-3xl font-bold mb-2">{item.label}</h4>
-                <p className="text-slate-muted opacity-0 group-hover:opacity-100 transition-opacity delay-100">Proven ROI and conversion metrics</p>
-              </div>
-              <div className="absolute top-8 right-8 opacity-0 group-hover:opacity-100 transition-opacity scale-50 group-hover:scale-100 duration-500">
-                <div className="bg-brand p-3 rounded-full text-white">
-                  <ArrowRight />
+              <div className="aspect-[4/5] overflow-hidden mb-6 relative">
+                <img 
+                  src={item.image} 
+                  alt={item.label}
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                />
+                <div className="absolute inset-0 bg-obsidian/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <span className="bg-brand text-white font-mono text-sm font-bold px-6 py-3 tracking-widest">VIEW RETURNS</span>
                 </div>
               </div>
+              <h4 className="text-xl font-bold text-stone-900 group-hover:text-brand transition-colors mb-1 font-sans">{item.label}</h4>
+              <p className="text-stone-500 font-mono text-[10px] font-bold uppercase tracking-widest">{item.stats}</p>
             </motion.div>
           ))}
         </div>
       </Section>
 
       {/* 9. FINAL CTA */}
-      <Section className="items-center text-center pb-40">
-        <div className="glow-mesh absolute inset-0 opacity-20" />
+      <Section className="items-center text-center bg-obsidian text-white py-40">
         <div className="max-w-4xl relative z-10">
-          <RevealText className="text-4xl md:text-7xl font-bold mb-12 font-syne">
-            Clarity works. <br/> <span className="text-brand">Now it’s your turn.</span>
+          <RevealText className="text-3xl md:text-5xl font-bold mb-8 text-stone-400 font-sans tracking-tight">
+            Clarity works. <br/> <span className="text-white text-5xl md:text-8xl font-mono uppercase tracking-tighter block mt-6">Stop losing visitors.</span>
           </RevealText>
           
-          <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
-            <Link href="/contact" className="px-12 py-6 bg-brand text-white rounded-2xl font-bold text-2xl hover:scale-105 transition-all shadow-2xl shadow-brand/40">
+          <div className="flex flex-col md:flex-row gap-8 justify-center items-center mt-16">
+            <Link href="/contact" className="px-12 py-8 bg-brand text-white font-mono font-bold text-2xl uppercase tracking-wide hover:scale-105 transition-transform shadow-[8px_8px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-[12px_12px_0px_0px_rgba(255,255,255,0.2)] w-full md:w-auto">
               Fix My Landing Page
             </Link>
-            <a href="https://wa.me/918248658302" target="_blank" className="px-12 py-6 bg-green-600 text-white rounded-2xl font-bold text-2xl hover:bg-green-500 transition-all flex items-center gap-4">
-              <MessageSquare />
+            <a href="https://wa.me/918248658302" target="_blank" className="px-10 py-6 border-2 border-white text-white font-mono font-bold text-xl uppercase tracking-wide hover:bg-white hover:text-obsidian transition-colors w-full md:w-auto">
               WhatsApp Us
             </a>
           </div>
+          
+          <p className="mt-16 text-stone-500 font-mono text-sm font-bold uppercase tracking-widest">
+            Ready to start? <span className="text-brand border-b border-brand pb-1 ml-2">Lead Studio is ready.</span>
+          </p>
         </div>
       </Section>
 
