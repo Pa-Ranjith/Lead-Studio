@@ -2,483 +2,677 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lead Studio | Landing Pages That Bring Enquiries</title>
-    <meta name="description" content="Focused landing pages engineered to drive action and generate enquiries within days.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- PRIMARY SEO -->
+    <title>Lead Studio | Landing Pages That Bring Enquiries</title>
+    <meta name="description" content="Focused landing pages engineered to drive action and generate enquiries within days. Stop losing visitors, start getting leads.">
+    <link rel="canonical" href="https://leadstudio.com/">
+    
+    <!-- OPEN GRAPH / SOCIAL (WhatsApp, LinkedIn, Facebook) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://leadstudio.com/">
+    <meta property="og:title" content="Lead Studio | Landing Pages That Bring Enquiries">
+    <meta property="og:description" content="Focused landing pages engineered to drive action and generate enquiries within days.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=630">
+
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lead Studio | Landing Pages That Bring Enquiries">
+    <meta name="twitter:description" content="Focused landing pages engineered to drive action and generate enquiries within days.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=630">
+    
+    <!-- STRUCTURED DATA (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Lead Studio",
+      "url": "https://leadstudio.com/",
+      "description": "Focused landing pages engineered to drive action and generate enquiries within days.",
+      "logo": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=630"
+    }
+    </script>
+    
+    <!-- PRELOADS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        mono: ['JetBrains Mono', 'monospace'],
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        beige: {
-                            light: '#F5F5F4',
-                            dark: '#E7E5E4',
-                        },
-                        tech: {
-                            black: '#1C1917',
-                            code: '#292524',
-                            emerald: '#10B981',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- SCRIPTS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+
     <style>
-        .cursor-blink {
-            animation: blink 1s step-end infinite;
+        :root {
+            --brand: #2563EB;
+            --brand-glow: rgba(37, 99, 235, 0.15);
+            --obsidian: #0A0A0A;
+            --obsidian-alt: #0D0D0D;
         }
-        @keyframes blink {
-            from, to { border-color: transparent }
-            50% { border-color: #10B981; }
+
+        html, body {
+            background-color: var(--obsidian);
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            -webkit-font-smoothing: antialiased;
         }
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s ease-out;
+
+        .font-syne { font-family: 'Syne', sans-serif; }
+
+        /* BRAND ACCENT */
+        .brand-accent {
+            color: #60A5FA;
+            background: rgba(37, 99, 235, 0.15);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            padding: 0.1em 0.4em;
+            border-radius: 0.25em;
+            display: inline-block;
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            text-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
         }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+
+        /* ATMOSPHERIC DEPTH */
+        .noise-bg::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 9999;
         }
-        .code-window {
-            border: 1px solid #444;
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
-        }
-        .terminal-header::before {
-            content: '● ● ●';
-            color: #555;
-            font-size: 10px;
-            letter-spacing: 4px;
+
+        .ambient-glow {
             position: absolute;
-            left: 12px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 1;
         }
-        ::selection {
-            background: #10B981;
-            color: white;
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.15; transform: scale(1); }
+            50% { opacity: 0.25; transform: scale(1.05); }
         }
-        /* Custom scrollbar for raw tech feel */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #F5F5F4; }
-        ::-webkit-scrollbar-thumb { background: #d6d3d1; }
-        ::-webkit-scrollbar-thumb:hover { background: #10B981; }
+        .animate-pulse-glow { animation: pulse-glow 10s infinite ease-in-out; }
+
+        /* SCENE SYSTEM */
+        .scene-gap { padding-top: clamp(8rem, 16vh, 12rem); padding-bottom: clamp(8rem, 16vh, 12rem); position: relative; }
+        .scene-h { min-height: clamp(600px, 90vh, 1000px); position: relative; }
+        
+        /* TYPOGRAPHY */
+        .h-hero { font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1.05; }
+        .h-scene { font-size: clamp(2.25rem, 5vw, 4rem); line-height: 1.1; }
+        .h-card { font-size: clamp(1.5rem, 2vw, 2rem); line-height: 1.3; }
+        .p-lead { font-size: clamp(1.25rem, 1.8vw, 1.5rem); line-height: 1.5; max-width: 65ch; }
+
+        .text-secondary { color: rgba(255, 255, 255, 0.65); }
+        .mask-text {
+            background: linear-gradient(to bottom, #fff 0%, rgba(255,255,255,0.4) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* PREMIUM CARDS */
+        .premium-card {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(24px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        /* Button resets for a11y */
+        button { text-align: left; background: none; border: none; font: inherit; cursor: pointer; color: inherit; width: 100%; }
+
+        .premium-card.interactive:hover, .premium-card.interactive:focus-visible {
+            background: rgba(255, 255, 255, 0.025);
+            border-color: rgba(37, 99, 235, 0.3);
+            transform: translateY(-8px);
+            outline: none;
+        }
+        .premium-card.interactive:focus-visible { box-shadow: 0 0 0 2px var(--brand); }
+
+        /* FIXED INTERFACE */
+        #sticky-cta { transform: translateY(120%); transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 1000; }
+        #sticky-cta.visible { transform: translateY(0); }
+        #floating-whatsapp { transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 900; }
+        #floating-whatsapp.cta-active { bottom: 160px; }
+
+        /* FAQ */
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1); visibility: hidden; }
+        .faq-item.active .faq-answer { max-height: 400px; padding-top: 1.5rem; visibility: visible; }
+        .faq-item.active i { transform: rotate(180deg); color: #2563EB; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--obsidian); }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
     </style>
 </head>
-<body class="bg-beige-light text-tech-black font-sans selection:bg-tech-emerald selection:text-white">
+<body class="noise-bg">
 
-    <!-- NAVIGATION -->
-    <nav class="sticky top-0 z-50 bg-beige-light/90 backdrop-blur-md border-b border-stone-300">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="font-mono font-bold text-lg flex items-center group cursor-pointer">
-                <div class="w-8 h-8 bg-tech-emerald border-2 border-tech-black mr-3 flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] group-hover:translate-y-[2px] group-hover:shadow-none transition-all">
-                    <div class="w-3 h-3 bg-white border-2 border-tech-black rotate-45 group-hover:rotate-90 transition-transform duration-500"></div>
-                </div>
-                LEAD.STUDIO
+    <!-- Ambient Layers -->
+    <header class="absolute top-0 left-0 right-0 z-50 p-6 md:px-12 md:py-8 w-full flex justify-between items-center max-w-7xl mx-auto">
+        <div class="flex items-center gap-3 cursor-pointer group">
+            <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center transform group-hover:scale-105 transition-transform shadow-[0_0_20px_rgba(37,99,235,0.4)]">
+                <div class="w-4 h-4 bg-white rounded-sm transform rotate-45 group-hover:rotate-90 transition-transform duration-500"></div>
             </div>
-            <div class="hidden md:flex space-x-8 font-mono text-sm uppercase tracking-tighter font-bold">
-                <a href="#problem" class="hover:text-tech-emerald transition-colors">The Problem</a>
-                <a href="#proof" class="hover:text-tech-emerald transition-colors">Proof</a>
-                <a href="#offer" class="hover:text-tech-emerald transition-colors">Pricing</a>
-                <a href="#faq" class="hover:text-tech-emerald transition-colors">FAQ</a>
-            </div>
-            <div class="flex items-center space-x-4">
-                <a href="https://forms.gle/f5BTwn69W1uT1Gbz9" target="_blank" class="font-mono text-sm font-bold bg-tech-emerald text-white px-5 py-2 hover:bg-emerald-600 transition-all rounded-none shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_rgba(28,25,23,1)]">GET STARTED</a>
-            </div>
+            <span class="font-syne font-bold text-2xl tracking-tight text-white">Lead Studio</span>
         </div>
-    </nav>
+    </header>
+    <div id="bg-glow-1" class="ambient-glow animate-pulse-glow bg-blue-600/10 w-[600px] h-[600px] top-[-10%] left-[-10%]"></div>
+    <div id="bg-glow-2" class="ambient-glow animate-pulse-glow bg-blue-600/5 w-[500px] h-[500px] top-[40%] right-[-10%]" style="animation-delay: -3s;"></div>
 
-    <!-- HERO SECTION -->
-    <section class="py-24 px-6 border-b border-stone-300 bg-beige-dark/30">
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-                <h1 class="font-mono text-5xl md:text-6xl font-bold leading-[1.1] mb-6 tracking-tighter uppercase">
-                    Most websites don't convert traffic to leads. <br/>
-                    <span class="text-tech-emerald">This one will.</span>
-                </h1>
-                <p class="text-xl text-stone-600 mb-8 max-w-lg leading-relaxed font-sans">
-                    Focused landing pages built to guide action.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="https://forms.gle/f5BTwn69W1uT1Gbz9" target="_blank" class="bg-tech-black text-white px-8 py-4 font-mono font-bold text-lg flex items-center justify-center group hover:bg-stone-800 transition-colors">
-                        GET LANDING PAGE
-                        <svg class="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                    </a>
-                </div>
+    <!-- Sticky Bottom CTA -->
+    <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 p-5 bg-obsidian/98 border-t border-white/5 shadow-2xl backdrop-blur-3xl" aria-hidden="true">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            <div class="hidden md:flex items-center gap-6">
+                <div class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" aria-hidden="true"></div>
+                <p class="font-bold text-base tracking-tight">Available: 5 project slots this week</p>
             </div>
-            
-            <!-- Terminal Visual -->
-            <div class="relative">
-                <div class="code-window bg-tech-code rounded-sm overflow-hidden font-mono text-sm text-stone-300 shadow-2xl">
-                    <div class="terminal-header h-8 bg-stone-800 flex items-center justify-center relative border-b border-stone-700">
-                        <span class="text-xs text-stone-500 uppercase tracking-widest">bash — lead-engine</span>
-                    </div>
-                    <div class="p-6 h-[320px] overflow-hidden">
-                        <div class="flex">
-                            <span class="text-tech-emerald mr-3">$</span>
-                            <span id="typing-text" class="text-white border-r-2 border-tech-emerald pr-1">initiate lead_capture</span>
-                        </div>
-                        <div id="terminal-output" class="mt-4 space-y-2 opacity-0 transition-opacity duration-500">
-                            <div class="text-stone-500">• Analyzing traffic flow...</div>
-                            <div class="text-white flex justify-between"><span>visitor_01:arrived</span><span class="text-tech-emerald">CAPTURED (120ms)</span></div>
-                            <div class="text-white flex justify-between"><span>visitor_02:bounced</span><span class="text-red-400">PREVENTED (45ms)</span></div>
-                            <div class="text-white flex justify-between"><span>visitor_03:engaged</span><span class="text-tech-emerald">CONVERTED (82ms)</span></div>
-                            <div class="mt-6 text-tech-emerald font-bold text-base">>>> Enquiries Generated: +3</div>
-                            <div class="mt-2 text-stone-500 italic">// System optimized for high-intent action</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Abstract Accent -->
-                <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-tech-emerald/10 border border-tech-emerald/20 -z-10"></div>
-                <div class="absolute -top-4 -left-4 w-16 h-16 bg-tech-black/5 border border-tech-black/10 -z-10"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CORE STATEMENT (NEW) -->
-    <section class="py-24 px-6 border-b border-stone-300 bg-white relative overflow-hidden">
-        <div class="max-w-4xl mx-auto text-center relative z-10 reveal">
-            <span class="font-mono text-xs font-bold text-stone-500 uppercase tracking-widest mb-6 block">// WHAT WE BUILD</span>
-            <h2 class="font-sans text-4xl md:text-5xl font-extrabold tracking-tight mb-8 text-stone-900 leading-tight">
-                Landing pages that bring enquiries within days.
-            </h2>
-            <div class="inline-block border-t border-b border-stone-200 py-3 px-6">
-                <p class="font-mono text-sm font-bold text-stone-400 uppercase tracking-widest">
-                    Built by <span class="text-tech-emerald">LEAD STUDIO</span>
-                </p>
-            </div>
-        </div>
-        <!-- Subtle Glow -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-tech-emerald/5 blur-3xl rounded-full pointer-events-none -z-10"></div>
-    </section>
-
-    <!-- REALIZATION (PROBLEM) -->
-    <section id="problem" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="text-center mb-16 reveal">
-            <h2 class="font-mono text-3xl md:text-4xl font-bold mb-6 uppercase tracking-tighter max-w-3xl mx-auto leading-tight">Visitors don't convert because they are confused.</h2>
-            <div class="h-1 w-20 bg-tech-emerald mx-auto"></div>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8">
-            <!-- Card 1 -->
-            <div class="reveal border border-stone-300 p-10 hover:border-tech-emerald transition-colors group relative bg-white shadow-sm hover:shadow-md">
-                <div class="w-12 h-12 bg-tech-black text-white flex items-center justify-center font-mono font-bold mb-8 group-hover:bg-tech-emerald transition-colors text-lg">01</div>
-                <h3 class="font-mono text-xl font-bold mb-4 uppercase">No Direction</h3>
-                <p class="text-stone-600 leading-relaxed font-sans text-lg">If you don't lead the visitor, they will leave in seconds.</p>
-            </div>
-            <!-- Card 2 -->
-            <div class="reveal border border-stone-300 p-10 hover:border-tech-emerald transition-colors group relative bg-white shadow-sm hover:shadow-md" style="transition-delay: 100ms;">
-                <div class="w-12 h-12 bg-tech-black text-white flex items-center justify-center font-mono font-bold mb-8 group-hover:bg-tech-emerald transition-colors text-lg">02</div>
-                <h3 class="font-mono text-xl font-bold mb-4 uppercase">Too Much Fluff</h3>
-                <p class="text-stone-600 leading-relaxed font-sans text-lg">Irrelevant sections dilute your core message and kill sales.</p>
-            </div>
-            <!-- Card 3 -->
-            <div class="reveal border border-stone-300 p-10 hover:border-tech-emerald transition-colors group relative bg-white shadow-sm hover:shadow-md" style="transition-delay: 200ms;">
-                <div class="w-12 h-12 bg-tech-black text-white flex items-center justify-center font-mono font-bold mb-8 group-hover:bg-tech-emerald transition-colors text-lg">03</div>
-                <h3 class="font-mono text-xl font-bold mb-4 uppercase">No Trust</h3>
-                <p class="text-stone-600 leading-relaxed font-sans text-lg">Poor structure makes your business look amateur.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ROI -->
-    <section class="py-24 px-6 bg-tech-black text-white border-y border-stone-800 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="mb-20 text-center reveal">
-                <h2 class="font-mono text-4xl md:text-5xl font-bold uppercase tracking-tighter mb-4">Same Traffic.<br>Better Results.</h2>
-                <p class="text-tech-emerald font-mono text-xs font-bold uppercase tracking-[0.2em]">Powered by Lead Studio</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8 text-center border-t border-stone-800 pt-16">
-                <div class="reveal">
-                    <div class="font-mono text-6xl lg:text-7xl font-bold text-white mb-4 flex justify-center items-center gap-2">
-                        <span class="text-tech-emerald text-4xl mt-2">↑</span>4x
-                    </div>
-                    <div class="font-mono text-sm font-bold text-stone-400 uppercase tracking-widest">Enquiries</div>
-                </div>
-                <div class="reveal" style="transition-delay: 100ms;">
-                    <div class="font-mono text-5xl lg:text-6xl font-bold text-white mb-4 flex justify-center items-center gap-2 mt-2">
-                        40%-70%
-                    </div>
-                    <div class="font-mono text-sm font-bold text-stone-400 uppercase tracking-widest">Conversion Rate</div>
-                </div>
-                <div class="reveal" style="transition-delay: 200ms;">
-                    <div class="font-mono text-6xl lg:text-7xl font-bold text-white mb-4 flex justify-center items-center gap-2">
-                        <span class="text-tech-emerald text-4xl mt-2">↑</span>3x
-                    </div>
-                    <div class="font-mono text-sm font-bold text-stone-400 uppercase tracking-widest">WhatsApp Leads</div>
-                </div>
-            </div>
-        </div>
-        <!-- Ambient depth -->
-        <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-tech-emerald/5 blur-[100px] rounded-full pointer-events-none"></div>
-    </section>
-
-    <!-- SHIFT -->
-    <section class="py-32 px-6 bg-beige-dark/20 border-b border-stone-300">
-        <div class="max-w-4xl mx-auto text-center reveal">
-            <h3 class="font-sans text-3xl md:text-5xl font-bold mb-8 tracking-tight text-stone-800 leading-tight">
-                A good landing page doesn't explain everything.
-            </h3>
-            <div class="inline-block bg-tech-black px-8 py-4">
-                <p class="font-mono text-xl md:text-2xl text-tech-emerald font-bold tracking-widest uppercase">
-                    It guides ONE decision.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SAMPLE WORK -->
-    <section id="proof" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="text-center mb-20 reveal">
-            <h2 class="font-mono text-3xl font-bold mb-4 uppercase tracking-tighter">Built for Action</h2>
-            <div class="h-1 w-20 bg-tech-emerald mx-auto mb-6"></div>
-            <p class="text-stone-600 font-sans text-lg max-w-2xl mx-auto">Every design by <span class="text-tech-black font-bold">Lead Studio</span> is a guided experience engineered for lead generation.</p>
-        </div>
-        
-        <div class="grid md:grid-cols-3 gap-10">
-            <!-- Project 1 -->
-            <div class="reveal group">
-                <div class="border border-stone-300 bg-white p-3 mb-6 relative overflow-hidden aspect-[4/5] group-hover:border-tech-emerald transition-all shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" alt="Real Estate Engine">
-                    <div class="absolute inset-0 bg-tech-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                        <span class="bg-tech-emerald text-white font-mono text-sm font-bold px-6 py-3 tracking-widest">VIEW RETURNS</span>
-                    </div>
-                </div>
-                <h3 class="font-sans font-bold text-xl mb-1 text-stone-900 group-hover:text-tech-emerald transition-colors">Real Estate Engine</h3>
-                <p class="text-stone-500 font-mono text-xs font-bold uppercase tracking-widest">40+ Leads in 1 Week</p>
-            </div>
-            
-            <!-- Project 2 -->
-            <div class="reveal group" style="transition-delay: 100ms;">
-                <div class="border border-stone-300 bg-white p-3 mb-6 relative overflow-hidden aspect-[4/5] group-hover:border-tech-emerald transition-all shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" alt="Fitness Accelerator">
-                    <div class="absolute inset-0 bg-tech-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                        <span class="bg-tech-emerald text-white font-mono text-sm font-bold px-6 py-3 tracking-widest">VIEW RETURNS</span>
-                    </div>
-                </div>
-                <h3 class="font-sans font-bold text-xl mb-1 text-stone-900 group-hover:text-tech-emerald transition-colors">Fitness Accelerator</h3>
-                <p class="text-stone-500 font-mono text-xs font-bold uppercase tracking-widest">3x Direct Bookings</p>
-            </div>
-            
-            <!-- Project 3 -->
-            <div class="reveal group" style="transition-delay: 200ms;">
-                <div class="border border-stone-300 bg-white p-3 mb-6 relative overflow-hidden aspect-[4/5] group-hover:border-tech-emerald transition-all shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" alt="Masterclass Opt-in">
-                    <div class="absolute inset-0 bg-tech-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                        <span class="bg-tech-emerald text-white font-mono text-sm font-bold px-6 py-3 tracking-widest">VIEW CASE STUDY</span>
-                    </div>
-                </div>
-                <h3 class="font-sans font-bold text-xl mb-1 text-stone-900 group-hover:text-tech-emerald transition-colors">Masterclass Opt-in</h3>
-                <p class="text-stone-500 font-mono text-xs font-bold uppercase tracking-widest">12.5% Conversion Rate</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section class="py-24 bg-white border-y border-stone-300 relative overflow-hidden">
-        <!-- Abstract Tech Background -->
-        <div class="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-        
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <h2 class="font-mono text-center text-3xl font-bold mb-16 uppercase reveal tracking-tighter">Trusted by Founders</h2>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Review 1 -->
-                <div class="reveal bg-beige-light border border-stone-200 p-10 flex flex-col h-full hover:border-tech-emerald transition-all hover:-translate-y-1 hover:shadow-lg">
-                    <div class="flex items-center mb-8">
-                        <div class="w-14 h-14 bg-tech-black text-white flex items-center justify-center font-mono font-bold text-lg mr-4">RS</div>
-                        <div>
-                            <div class="font-bold font-sans text-stone-900 text-lg">Rohit Sharma</div>
-                            <div class="text-[10px] text-stone-500 font-mono tracking-widest uppercase font-bold">Founder, GreenRoots</div>
-                        </div>
-                    </div>
-                    <p class="text-stone-700 font-sans italic flex-grow text-xl leading-relaxed mb-6">"Simple, fast, and it just worked. Started getting enquiries within days."</p>
-                    <div class="flex text-tech-emerald tracking-widest">★★★★★</div>
-                </div>
-                
-                <!-- Review 2 -->
-                <div class="reveal bg-beige-light border border-stone-200 p-10 flex flex-col h-full hover:border-tech-emerald transition-all hover:-translate-y-1 hover:shadow-lg" style="transition-delay: 100ms;">
-                    <div class="flex items-center mb-8">
-                        <div class="w-14 h-14 bg-tech-black text-white flex items-center justify-center font-mono font-bold text-lg mr-4">AN</div>
-                        <div>
-                            <div class="font-bold font-sans text-stone-900 text-lg">Anjali Nair</div>
-                            <div class="text-[10px] text-stone-500 font-mono tracking-widest uppercase font-bold">High-Performance Coach</div>
-                        </div>
-                    </div>
-                    <p class="text-stone-700 font-sans italic flex-grow text-xl leading-relaxed mb-6">"Exactly what I needed — nothing extra. 3x higher direct opt-in rate."</p>
-                    <div class="flex text-tech-emerald tracking-widest">★★★★★</div>
-                </div>
-                
-                <!-- Review 3 -->
-                <div class="reveal bg-beige-light border border-stone-200 p-10 flex flex-col h-full hover:border-tech-emerald transition-all hover:-translate-y-1 hover:shadow-lg" style="transition-delay: 200ms;">
-                    <div class="flex items-center mb-8">
-                        <div class="w-14 h-14 bg-tech-black text-white flex items-center justify-center font-mono font-bold text-lg mr-4">VS</div>
-                        <div>
-                            <div class="font-bold font-sans text-stone-900 text-lg">Vikram Singh</div>
-                            <div class="text-[10px] text-stone-500 font-mono tracking-widest uppercase font-bold">Principal Agent</div>
-                        </div>
-                    </div>
-                    <p class="text-stone-700 font-sans italic flex-grow text-xl leading-relaxed mb-6">"Built for action, not just design. Converted 40+ cold leads in week 1."</p>
-                    <div class="flex text-tech-emerald tracking-widest">★★★★★</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- OFFER -->
-    <section id="offer" class="py-32 px-6 max-w-5xl mx-auto">
-        <div class="border-[3px] border-tech-black p-10 md:p-16 bg-white relative shadow-[16px_16px_0px_0px_rgba(28,25,23,1)] reveal group hover:border-tech-emerald transition-colors duration-500">
-            <!-- Badge -->
-            <div class="absolute top-0 right-0 bg-tech-black text-white font-mono text-[10px] font-bold px-6 py-3 uppercase tracking-widest group-hover:bg-tech-emerald transition-colors">
-                5 Slots Available
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div>
-                    <h2 class="font-mono text-2xl font-bold uppercase tracking-tighter mb-8 text-stone-500">Lead Page Starter</h2>
-                    <div class="text-6xl md:text-7xl font-extrabold font-sans tracking-tight mb-6 text-stone-900">
-                        ₹3k<span class="text-3xl text-stone-400 font-medium align-middle mx-2">–</span>₹5k
-                    </div>
-                    <div class="font-mono text-tech-emerald font-bold mb-12 flex items-center gap-3 text-lg">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        2–3 Day Delivery
-                    </div>
-                    <a href="https://forms.gle/f5BTwn69W1uT1Gbz9" target="_blank" class="block w-full py-5 bg-tech-emerald text-white text-center font-mono font-bold text-xl hover:bg-emerald-600 transition-colors shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_rgba(28,25,23,1)]">
-                        GET MY LANDING PAGE
-                    </a>
-                </div>
-                
-                <div class="bg-beige-light p-10 border border-stone-200 h-full flex flex-col justify-center">
-                    <div class="font-mono text-xs font-bold text-stone-500 mb-8 uppercase tracking-[0.2em]">The Package</div>
-                    <ul class="space-y-6 font-sans text-stone-800 font-medium text-lg">
-                        <li class="flex items-start gap-4">
-                            <svg class="w-6 h-6 text-tech-emerald shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                            High-conversion copy structure
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <svg class="w-6 h-6 text-tech-emerald shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                            Ultra-fast mobile layout
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <svg class="w-6 h-6 text-tech-emerald shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                            Form + WhatsApp integration
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TRANSITION + FINAL CTA -->
-    <section class="py-32 px-6 bg-tech-black text-white text-center border-b border-stone-800 relative overflow-hidden">
-        <div class="max-w-4xl mx-auto reveal relative z-10">
-            <h2 class="font-sans text-4xl md:text-5xl font-bold mb-8 tracking-tight text-stone-400">Clarity works. Now it's your turn.</h2>
-            <h3 class="font-mono text-5xl md:text-7xl font-bold mb-16 uppercase tracking-tighter text-white">Stop losing visitors.</h3>
-            
-            <a href="https://forms.gle/f5BTwn69W1uT1Gbz9" target="_blank" class="inline-block bg-tech-emerald text-white px-12 md:px-16 py-6 md:py-8 font-mono text-2xl font-bold uppercase tracking-wide hover:scale-105 transition-transform shadow-[8px_8px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-[12px_12px_0px_0px_rgba(255,255,255,0.15)] mb-12">
-                Fix My Landing Page
+            <a href="https://forms.gle/f5BTwn69W1uT1Gbz9" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto px-10 py-4 bg-blue-600 text-white rounded-full font-bold text-center transition-all hover:scale-105 active:scale-95 shadow-xl">
+                Get Landing Page
             </a>
-            
-            <p class="font-mono text-sm text-stone-500 uppercase tracking-widest">Ready to start? <span class="text-tech-emerald font-bold border-b border-tech-emerald pb-1">LEAD STUDIO</span> is ready.</p>
         </div>
-        <!-- Ambient depth -->
-        <div class="absolute bottom-[-20%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-tech-emerald/10 blur-[120px] rounded-full pointer-events-none"></div>
-    </section>
+    </div>
 
-    <!-- FAQ -->
-    <section id="faq" class="py-32 bg-beige-light border-b border-stone-300">
-        <div class="max-w-3xl mx-auto px-6">
-            <h2 class="font-mono text-center text-4xl font-bold mb-16 uppercase reveal tracking-tighter">FAQ</h2>
-            <div class="space-y-4">
-                <!-- FAQ Item 1 -->
-                <details class="group bg-white border border-stone-300 p-8 cursor-pointer open:border-tech-emerald transition-colors reveal">
-                    <summary class="font-mono font-bold flex justify-between items-center list-none uppercase text-lg md:text-xl text-stone-900">
-                        How fast can I get my landing page?
-                        <span class="text-tech-emerald group-open:rotate-45 transition-transform text-3xl font-light ml-4">+</span>
-                    </summary>
-                    <div class="mt-6 pt-6 border-t border-stone-100">
-                        <p class="text-stone-600 leading-relaxed font-sans text-lg">Usually within 2–3 days once business details are provided.</p>
-                    </div>
-                </details>
-                
-                <!-- FAQ Item 2 -->
-                <details class="group bg-white border border-stone-300 p-8 cursor-pointer open:border-tech-emerald transition-colors reveal" style="transition-delay: 100ms;">
-                    <summary class="font-mono font-bold flex justify-between items-center list-none uppercase text-lg md:text-xl text-stone-900">
-                        What if I don't have content ready?
-                        <span class="text-tech-emerald group-open:rotate-45 transition-transform text-3xl font-light ml-4">+</span>
-                    </summary>
-                    <div class="mt-6 pt-6 border-t border-stone-100">
-                        <p class="text-stone-600 leading-relaxed font-sans text-lg">That's perfectly fine. I'll guide you through a simple set of questions and structure all the copy for you.</p>
-                    </div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="py-16 px-6 bg-white text-center">
-        <div class="font-mono font-bold text-xl mb-6 flex items-center justify-center group cursor-pointer">
-            <div class="w-8 h-8 bg-tech-emerald border-2 border-tech-black mr-3 flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] group-hover:translate-y-[2px] group-hover:shadow-none transition-all">
-                <div class="w-3 h-3 bg-white border-2 border-tech-black rotate-45 group-hover:rotate-90 transition-transform duration-500"></div>
-            </div>
-            LEAD.STUDIO
-        </div>
-        <div class="text-stone-400 font-mono text-xs font-bold uppercase tracking-widest">
-            © 2026 LEAD STUDIO. ALL RIGHTS RESERVED.
-        </div>
-    </footer>
-
-    <!-- FLOATING WHATSAPP -->
-    <a href="https://wa.me/918248658302?text=Hi%2C%20I%20want%20a%20landing%20page" target="_blank" aria-label="Chat on WhatsApp" class="fixed bottom-8 right-6 md:right-8 bg-tech-emerald text-white p-4 shadow-[4px_4px_0px_0px_rgba(28,25,23,1)] hover:translate-y-[-4px] hover:shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] transition-all z-50 flex items-center justify-center">
-        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
-        </svg>
+    <!-- Floating WhatsApp -->
+    <a id="floating-whatsapp" href="https://wa.me/918248658302?text=Hi%2C%20I%20want%20a%20landing%20page" target="_blank" rel="noopener noreferrer" aria-label="Chat with Lead Studio on WhatsApp" class="fixed bottom-8 right-6 md:right-12 w-14 h-14 bg-green-600 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-90">
+        <i data-lucide="message-circle" class="text-white w-7 h-7" aria-hidden="true"></i>
     </a>
 
-    <script>
-        // Hero Terminal Typing Effect
-        const text = "initiate lead_capture";
-        const typingText = document.getElementById('typing-text');
-        const output = document.getElementById('terminal-output');
-        let i = 0;
+    <main>
+        <!-- 01 HERO -->
+        <section class="relative scene-h flex flex-col justify-center items-center px-6 pt-20 overflow-hidden">
+            <div class="max-w-6xl w-full text-center relative z-10">
+                <div class="inline-flex items-center gap-3 px-4 py-1.5 bg-white/5 border border-white/10 rounded-full mb-12 hero-step-1 opacity-0 translate-y-4">
+                    <span class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" aria-hidden="true"></span>
+                    <span class="text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500">5 SLOTS AVAILABLE @ <span class="brand-accent">LEAD STUDIO</span></span>
+                </div>
+                
+                <h1 class="font-syne font-bold tracking-tighter mask-text h-hero mb-12 hero-step-1 opacity-0 translate-y-4" id="hero-headline">
+                    Most websites don’t <br> convert traffic to leads.
+                </h1>
+                
+                <div class="opacity-0 translate-y-4 mb-12" id="hero-step-2">
+                    <h2 class="text-3xl md:text-6xl font-syne font-bold text-blue-600 leading-tight">This one will.</h2>
+                </div>
 
-        function type() {
-            if (i < text.length) {
-                typingText.innerHTML = text.substring(0, i + 1);
-                i++;
-                setTimeout(type, 80); // Snappy tech feel
-            } else {
-                typingText.classList.remove('border-r-2');
-                output.style.opacity = '1';
+                <p class="text-secondary p-lead mx-auto font-medium mb-16 hero-step-3 opacity-0 translate-y-4">
+                    <span class="brand-accent">Lead Studio</span> builds landing pages that start bringing enquiries within days.
+                </p>
+
+                <div class="hero-step-3 opacity-0 translate-y-4">
+                    <a href="https://forms.gle/f5BTwn69W1uT1Gbz9" target="_blank" rel="noopener noreferrer" class="px-14 py-6 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold text-xl transition-all transform hover:scale-105 shadow-2xl inline-block">
+                        Get Landing Page
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 REALIZATION (STRICT SEQUENCE) -->
+        <section class="scene-gap px-6 relative bg-obsidian-alt overflow-hidden border-y border-white/5" id="realization-scene">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-blue-600/15 filter blur-[160px] opacity-0" id="realization-bloom"></div>
+            
+            <div class="max-w-7xl mx-auto relative z-10">
+                <!-- STEP 1: DOMINANT HEADLINE -->
+                <div id="realization-headline-container" class="mb-32">
+                    <h2 class="font-syne font-bold h-scene text-center mask-text mx-auto max-w-5xl opacity-0 translate-y-12" id="realization-headline">
+                        Visitors don’t convert because they are confused.
+                    </h2>
+                </div>
+
+                <!-- STEP 2: STAGGERED CARDS -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10" id="realization-cards">
+                    <article class="premium-card p-12 rounded-[2.5rem] realization-card opacity-0">
+                        <h3 class="text-2xl font-bold mb-5">No Direction</h3>
+                        <p class="text-secondary text-base leading-relaxed">If you don't lead the visitor, they will leave in seconds.</p>
+                    </article>
+                    <article class="premium-card p-12 rounded-[2.5rem] realization-card opacity-0">
+                        <h3 class="text-2xl font-bold mb-5">Too Much Fluff</h3>
+                        <p class="text-secondary text-base leading-relaxed">Irrelevant sections dilute your core message and kill sales.</p>
+                    </article>
+                    <article class="premium-card p-12 rounded-[2.5rem] realization-card opacity-0">
+                        <h3 class="text-2xl font-bold mb-5">No Trust</h3>
+                        <p class="text-secondary text-base leading-relaxed">Poor structure makes your business look amateur.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 ROI IMPACT (REFINED & PREMIUM) -->
+        <section class="scene-gap px-6 bg-obsidian relative overflow-hidden" id="roi-scene">
+            <div class="max-w-7xl mx-auto relative z-10">
+                
+                <div class="text-center max-w-4xl mx-auto mb-20 reveal-up">
+                    <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-500 mb-6">Without increasing your traffic</p>
+                    <h2 class="font-syne font-bold h-scene tracking-tighter leading-tight">Same Traffic.<br>Better Results.</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 max-w-6xl mx-auto" id="roi-blocks">
+                    
+                    <!-- Card 1 -->
+                    <div class="premium-card p-8 md:p-10 lg:p-12 rounded-[2rem] text-center roi-block opacity-0 group relative overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-blue-500/30">
+                        <div class="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <p class="text-5xl lg:text-6xl font-syne font-bold text-white mb-4 tracking-tighter whitespace-nowrap inline-flex items-center justify-center relative z-10 w-full">
+                            <i data-lucide="arrow-up" class="w-10 h-10 text-blue-500 mr-2 -mt-1 shrink-0" stroke-width="3"></i>4x
+                        </p>
+                        <p class="text-base lg:text-lg font-medium text-slate-400 tracking-wide relative z-10">Enquiries</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="premium-card p-8 md:p-10 lg:p-12 rounded-[2rem] text-center roi-block opacity-0 group relative overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-blue-500/30 shadow-[0_0_40px_rgba(37,99,235,0.05)] border-blue-500/20">
+                        <div class="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <p class="text-4xl lg:text-5xl font-syne font-bold text-white mb-4 tracking-tighter whitespace-nowrap inline-flex items-center justify-center relative z-10 w-full">
+                            <i data-lucide="arrow-up" class="w-8 h-8 lg:w-10 lg:h-10 text-blue-500 mr-2 -mt-1 shrink-0" stroke-width="3"></i>40% – 70%
+                        </p>
+                        <p class="text-base lg:text-lg font-medium text-slate-400 tracking-wide relative z-10">Conversion Rate</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="premium-card p-10 lg:p-12 rounded-[2rem] text-center roi-block opacity-0 group relative overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-blue-500/30">
+                        <div class="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <p class="text-5xl lg:text-6xl font-syne font-bold text-white mb-4 tracking-tighter whitespace-nowrap inline-flex items-center justify-center relative z-10 w-full">
+                            <i data-lucide="arrow-up" class="w-10 h-10 text-blue-500 mr-2 -mt-1 shrink-0" stroke-width="3"></i>3x
+                        </p>
+                        <p class="text-base lg:text-lg font-medium text-slate-400 tracking-wide relative z-10">WhatsApp Leads</p>
+                    </div>
+
+                </div>
+
+                <div class="text-center reveal-up">
+                    <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Powered by <span class="brand-accent">Lead Studio</span></p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 04 SHIFT -->
+        <section id="pin-section" class="h-screen flex items-center justify-center px-6 overflow-hidden relative bg-obsidian-alt">
+            <div class="max-w-5xl text-center relative z-10">
+                <h2 class="text-2xl md:text-5xl font-medium text-slate-600 font-syne mb-16" id="pin-text-1">A good landing page doesn’t explain everything.</h2>
+                <p class="font-bold font-syne scale-90 opacity-0 mask-text h-scene" id="pin-text-2">It guides ONE decision.</p>
+            </div>
+        </section>
+
+        <!-- 05 SAMPLE WORK -->
+        <section id="sample-work" class="scene-gap px-6 bg-obsidian relative overflow-hidden">
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="max-w-2xl reveal-up mb-24">
+                    <h2 class="font-syne font-bold mb-8 h-scene tracking-tighter">Built for action.</h2>
+                    <p class="text-lg text-secondary leading-relaxed">Every design by <span class="brand-accent">Lead Studio</span> is a guided experience engineered for lead generation.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <button class="group float-reveal premium-card interactive p-0 text-left transition-all duration-500 hover:-translate-y-4 hover:shadow-[0_30px_60px_-15px_rgba(37,99,235,0.2)]" onclick="openModal('real-estate')" aria-label="View Real Estate Engine project details">
+                        <div class="aspect-[4/5] rounded-[3rem] overflow-hidden mb-8 w-full relative">
+                            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800&h=1000" width="800" height="1000" alt="Real Estate Property Interior" loading="lazy" decoding="async" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-1000 absolute inset-0">
+                            <!-- Hover Overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                                <div class="translate-y-6 group-hover:translate-y-0 transition-transform duration-500 ease-out flex justify-center">
+                                    <span class="inline-flex items-center gap-2 text-white font-bold bg-blue-600/90 backdrop-blur-md px-5 py-2.5 rounded-full text-xs shadow-xl">
+                                        View Returns <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-2 pb-2">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-blue-500 transition-colors">Real Estate Engine</h3>
+                            <p class="text-secondary text-[10px] font-bold uppercase tracking-widest">40+ Leads in 1 Week</p>
+                        </div>
+                    </button>
+                    
+                    <button class="group float-reveal premium-card interactive p-0 text-left transition-all duration-500 hover:-translate-y-4 hover:shadow-[0_30px_60px_-15px_rgba(37,99,235,0.2)]" onclick="openModal('fitness')" aria-label="View Fitness Accelerator project details">
+                        <div class="aspect-[4/5] rounded-[3rem] overflow-hidden mb-8 w-full relative">
+                            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800&h=1000" width="800" height="1000" alt="Fitness Training Environment" loading="lazy" decoding="async" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-1000 absolute inset-0">
+                            <!-- Hover Overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                                <div class="translate-y-6 group-hover:translate-y-0 transition-transform duration-500 ease-out flex justify-center">
+                                    <span class="inline-flex items-center gap-2 text-white font-bold bg-blue-600/90 backdrop-blur-md px-5 py-2.5 rounded-full text-xs shadow-xl">
+                                        View Returns <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-2 pb-2">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-blue-500 transition-colors">Fitness Accelerator</h3>
+                            <p class="text-secondary text-[10px] font-bold uppercase tracking-widest">3x Direct Bookings</p>
+                        </div>
+                    </button>
+                    
+                    <button class="group float-reveal premium-card interactive p-0 text-left transition-all duration-500 hover:-translate-y-4 hover:shadow-[0_30px_60px_-15px_rgba(37,99,235,0.2)]" onclick="openModal('coaching')" aria-label="View Masterclass Opt-in project details">
+                        <div class="aspect-[4/5] rounded-[3rem] overflow-hidden mb-8 w-full relative">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800&h=1000" width="800" height="1000" alt="Professional Coaching Session" loading="lazy" decoding="async" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-1000 absolute inset-0">
+                            <!-- Hover Overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                                <div class="translate-y-6 group-hover:translate-y-0 transition-transform duration-500 ease-out flex justify-center">
+                                    <span class="inline-flex items-center gap-2 text-white font-bold bg-blue-600/90 backdrop-blur-md px-5 py-2.5 rounded-full text-xs shadow-xl">
+                                        View Case Study <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-2 pb-2">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-blue-500 transition-colors">Masterclass Opt-in</h3>
+                            <p class="text-secondary text-[10px] font-bold uppercase tracking-widest">12.5% Conversion Rate</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06 TESTIMONIALS -->
+        <section id="testimonials" class="scene-gap px-6 max-w-7xl mx-auto relative bg-obsidian-alt overflow-hidden rounded-[4rem]">
+            <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-10">
+                <article class="premium-card p-12 rounded-[2.5rem] float-reveal group h-full">
+                    <div class="flex items-center gap-5 mb-10">
+                        <div class="w-14 h-14 rounded-full bg-blue-600/10 flex items-center justify-center font-bold text-blue-600 text-sm" aria-hidden="true">RS</div>
+                        <div>
+                            <p class="font-bold text-white text-base">Rohit Sharma</p>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Founder, GreenRoots (Local Services)</p>
+                        </div>
+                    </div>
+                    <blockquote class="text-xl font-medium mb-10 group-hover:text-blue-500 transition-colors leading-[1.6]">“Simple, fast, and it just worked.”</blockquote>
+                    <div class="mt-auto pt-6 border-t border-white/5">
+                        <p class="text-blue-600 font-bold text-sm tracking-tight">Started getting enquiries within days.</p>
+                    </div>
+                </article>
+                <article class="premium-card p-12 rounded-[2.5rem] float-reveal group h-full">
+                    <div class="flex items-center gap-5 mb-10">
+                        <div class="w-14 h-14 rounded-full bg-blue-600/10 flex items-center justify-center font-bold text-blue-600 text-sm" aria-hidden="true">AN</div>
+                        <div>
+                            <p class="font-bold text-white text-base">Anjali Nair</p>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500">High-Performance Coach</p>
+                        </div>
+                    </div>
+                    <blockquote class="text-xl font-medium mb-10 group-hover:text-blue-500 transition-colors leading-[1.6]">“Exactly what I needed — nothing extra.”</blockquote>
+                    <div class="mt-auto pt-6 border-t border-white/5">
+                        <p class="text-blue-600 font-bold text-sm tracking-tight">3x higher direct opt-in rate.</p>
+                    </div>
+                </article>
+                <article class="premium-card p-12 rounded-[2.5rem] float-reveal group h-full">
+                    <div class="flex items-center gap-5 mb-10">
+                        <div class="w-14 h-14 rounded-full bg-blue-600/10 flex items-center justify-center font-bold text-blue-600 text-sm" aria-hidden="true">VS</div>
+                        <div>
+                            <p class="font-bold text-white text-base">Vikram Singh</p>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Principal Agent, Urban Realty</p>
+                        </div>
+                    </div>
+                    <blockquote class="text-xl font-medium mb-10 group-hover:text-blue-500 transition-colors leading-[1.6]">“Built for action, not just design.”</blockquote>
+                    <div class="mt-auto pt-6 border-t border-white/5">
+                        <p class="text-blue-600 font-bold text-sm tracking-tight">Converted 40+ cold leads in week 1.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 07 OFFER -->
+        <section id="pricing" class="scene-gap px-6 bg-obsidian relative overflow-hidden">
+            <div class="max-w-5xl mx-auto premium-card rounded-[4rem] p-8 md:p-16 lg:p-24 relative overflow-hidden offer-reveal z-10">
+                <div class="absolute top-0 right-0 bg-blue-600 px-10 py-3 rounded-bl-[2.5rem] font-bold text-[9px] uppercase tracking-[0.4em]">5 SLOTS AVAILABLE</div>
+                <div class="grid md:grid-cols-2 gap-20">
+                    <div>
+                        <h2 class="text-4xl font-syne font-bold mb-10 tracking-tighter">Lead Page Starter</h2>
+                        <div class="mb-16">
+                            <p class="text-6xl font-bold mb-4 tracking-tighter">₹3k – ₹5k</p>
+                            <p class="text-blue-600 font-bold flex items-center gap-3 text-lg tracking-wide"><i data-lucide="clock" class="w-6 h-6" aria-hidden="true"></i> 2–3 Day Delivery</p>
+                        </div>
+                        <a href="https://forms.gle/f5BTwn69W1uT1Gbz9" target="_blank" rel="noopener noreferrer" class="w-full py-6 bg-blue-600 text-white rounded-2xl font-bold text-2xl text-center shadow-2xl block transition-all hover:scale-105">Get My Landing Page</a>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <h3 class="text-[10px] font-bold text-slate-600 uppercase tracking-[0.3em] mb-8">The Package:</h3>
+                        <ul class="space-y-6" role="list">
+                            <li class="flex gap-5 text-lg font-medium items-center"><i data-lucide="check" class="text-blue-600 w-6 h-6 shrink-0" aria-hidden="true"></i> High-conversion copy structure</li>
+                            <li class="flex gap-5 text-lg font-medium items-center"><i data-lucide="check" class="text-blue-600 w-6 h-6 shrink-0" aria-hidden="true"></i> Ultra-fast mobile layout</li>
+                            <li class="flex gap-5 text-lg font-medium items-center"><i data-lucide="check" class="text-blue-600 w-6 h-6 shrink-0" aria-hidden="true"></i> Form + WhatsApp integration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 08 TRANSITION -->
+        <section class="scene-gap flex items-center justify-center text-center reveal-up px-6 bg-obsidian-alt relative overflow-hidden">
+            <div class="ambient-glow bg-blue-600/15 w-full h-full top-0 left-0 opacity-40"></div>
+            <h2 class="font-syne font-bold mask-text h-scene tracking-tighter leading-tight flex items-center justify-center relative z-10">Clarity works.<br> Now it’s your turn.</h2>
+        </section>
+
+        <!-- 09 FINAL CTA -->
+        <section class="scene-gap flex flex-col justify-center items-center px-6 text-center bg-obsidian relative overflow-hidden">
+            <div class="max-w-5xl mx-auto relative z-10 py-40">
+                <h2 class="font-syne font-bold mb-20 mask-text h-scene tracking-tighter reveal-up leading-none">Stop losing visitors.</h2>
+                <div class="reveal-up flex flex-col items-center gap-12">
+                    <a href="https://forms.gle/f5BTwn69W1uT1Gbz9" target="_blank" rel="noopener noreferrer" class="px-20 py-8 bg-blue-600 text-white rounded-[2rem] font-bold text-3xl shadow-2xl hover:scale-105 transition-all">Fix My Landing Page</a>
+                    <p class="text-secondary text-xl tracking-wide">Ready to start? <span class="brand-accent">Lead Studio</span> is ready.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10 FAQ (A11y Upgraded) -->
+        <section class="scene-gap px-6 max-w-4xl mx-auto bg-obsidian-alt relative rounded-t-[4rem]" aria-labelledby="faq-heading">
+            <h2 id="faq-heading" class="font-syne font-bold mb-24 text-center reveal-up text-3xl tracking-tighter">FAQ</h2>
+            <div class="space-y-12">
+                <div class="faq-item border-b border-white/10 pb-12 reveal-up group">
+                    <button class="flex justify-between items-center gap-8 w-full" aria-expanded="false" aria-controls="faq-1" onclick="toggleFaq(0, this)">
+                        <span class="text-xl md:text-2xl font-bold group-hover:text-blue-500 transition-colors tracking-tight text-left">How fast can I get my landing page?</span>
+                        <i data-lucide="chevron-down" class="transition-transform duration-500 text-slate-600 w-7 h-7" aria-hidden="true"></i>
+                    </button>
+                    <div id="faq-1" class="faq-answer"><p class="text-secondary text-lg leading-relaxed mt-4">Usually within 2–3 days once business details are provided.</p></div>
+                </div>
+                <div class="faq-item border-b border-white/10 pb-12 reveal-up group">
+                    <button class="flex justify-between items-center gap-8 w-full" aria-expanded="false" aria-controls="faq-2" onclick="toggleFaq(1, this)">
+                        <span class="text-xl md:text-2xl font-bold group-hover:text-blue-500 transition-colors tracking-tight text-left">What if I don’t have content ready?</span>
+                        <i data-lucide="chevron-down" class="transition-transform duration-500 text-slate-600 w-7 h-7" aria-hidden="true"></i>
+                    </button>
+                    <div id="faq-2" class="faq-answer"><p class="text-secondary text-lg leading-relaxed mt-4">That’s perfectly fine. I’ll guide you through a simple set of questions and structure all the copy for you.</p></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="pt-40 pb-64 border-t border-white/5 text-center text-slate-700 text-[9px] px-6 bg-obsidian">
+        <p class="mb-6 text-slate-600 tracking-[0.4em] uppercase font-bold">Engineered by <span class="brand-accent">Lead Studio</span></p>
+        <p class="opacity-40">&copy; 2026 Lead Studio. All rights reserved.</p>
+    </footer>
+
+    <!-- MODAL (A11y Compliant) -->
+    <div id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" class="modal fixed inset-0 flex items-center justify-center px-6 invisible z-[10001]">
+        <div class="absolute inset-0 bg-black/98 backdrop-blur-3xl" onclick="closeModal()" aria-hidden="true"></div>
+        <div class="premium-card max-w-5xl w-full rounded-[4rem] p-6 md:p-12 lg:p-20 relative z-10 modal-content overflow-y-auto max-h-[90vh] opacity-0 translate-y-10 transition-all duration-500" tabindex="-1">
+            <button onclick="closeModal()" id="modal-close-btn" class="absolute top-6 right-6 md:top-10 md:right-10 text-white hover:rotate-90 transition-transform" aria-label="Close modal">
+                <i data-lucide="x" class="w-10 h-10" aria-hidden="true"></i>
+            </button>
+            <div id="modal-inner-content" class="grid md:grid-cols-2 gap-20"></div>
+        </div>
+    </div>
+
+    <script>
+        // INIT
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
             }
+        });
+        
+        window.addEventListener('load', () => {
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                initAnimations();
+            }
+        });
+
+        // GLOBAL FOCUS TRAP STATE
+        let lastFocusedElement;
+
+        function initAnimations() {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // SEQUENCED REALIZATION SCENE (STRICT HIERARCHY)
+            const realTl = gsap.timeline({
+                scrollTrigger: { trigger: "#realization-scene", start: "top 75%", toggleActions: "play none none none" }
+            });
+
+            // Step 1: Ambient Bloom and Headline appear immediately
+            realTl.to("#realization-bloom", { opacity: 0.5, duration: 1.5, ease: "power2.out" })
+                  .to("#realization-headline", { opacity: 1, y: 0, duration: 1.2, ease: "power4.out" }, "<")
+                  // Quick cognitive pause before revealing cards
+                  .fromTo(".realization-card", 
+                      { opacity: 0, y: 40 }, 
+                      { opacity: 1, y: 0, stagger: 0.15, duration: 0.8, ease: "power3.out" }, 
+                      "+=0.3"
+                  );
+
+            // ROI SCENE (BRUTALIST)
+            gsap.fromTo(".roi-block", 
+                { opacity: 0, scale: 0.9, y: 30 }, 
+                { opacity: 1, scale: 1, y: 0, stagger: 0.2, duration: 1.2, ease: "power4.out", 
+                  scrollTrigger: { trigger: "#roi-blocks", start: "top 80%" } 
+                }
+            );
+
+            // Hero Sequence - STRICT STORYTELLING SYNC
+            const heroTl = gsap.timeline({ delay: 0.1 });
+            heroTl.to(".hero-step-1", { opacity: 1, y: 0, stagger: 0.2, duration: 1.2, ease: "power4.out" })
+                  .to("#hero-step-2", { opacity: 1, y: 0, duration: 1.2, ease: "power4.out" }, "+=0.3") // Pause for impact before the answer
+                  .to(".hero-step-3", { opacity: 1, y: 0, stagger: 0.2, duration: 1.2, ease: "power4.out" }, "+=0.3"); // Then reveal the explanation & CTA
+
+            // Split Words
+            document.querySelectorAll('.split-words').forEach(heading => {
+                const words = heading.textContent.split(' ');
+                heading.innerHTML = words.map(word => `<span class="inline-block opacity-0 translate-y-8 blur-xl">${word}</span>`).join(' ');
+                gsap.to(heading.querySelectorAll('span'), {
+                    opacity: 1, y: 0, filter: "blur(0px)", stagger: 0.1, duration: 1.2, ease: "power3.out",
+                    scrollTrigger: { trigger: heading, start: "top 92%" }
+                });
+            });
+
+            function forceReveal(elements) {
+                elements.forEach(el => {
+                    gsap.set(el, { opacity: 0, y: 30 });
+                    ScrollTrigger.create({
+                        trigger: el, start: "top 92%",
+                        onEnter: () => gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: "power3.out" }),
+                        onEnterBack: () => gsap.to(el, { opacity: 1, y: 0, duration: 0.5 })
+                    });
+                });
+            }
+
+            forceReveal(document.querySelectorAll('.reveal-up'));
+            forceReveal(document.querySelectorAll('.float-reveal'));
+
+            // Pin Scene
+            const pinTl = gsap.timeline({ scrollTrigger: { trigger: "#pin-section", start: "top top", end: "+=150%", pin: true, scrub: 1.5 } });
+            pinTl.to("#pin-text-1", { opacity: 0, y: -40, duration: 1 })
+                 .to("#pin-text-2", { opacity: 1, scale: 1, duration: 2 }, "-=0.5");
+
+            // Offer Reveal
+            gsap.from(".offer-reveal", {
+                opacity: 0, y: 60, scale: 0.95, duration: 1.5, ease: "power3.out",
+                scrollTrigger: { trigger: ".offer-reveal", start: "top 95%" }
+            });
         }
 
-        // Intersection Observer for scroll animations (Reveal)
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
+        // FAQ Toggle (A11y Compliant)
+        function toggleFaq(index, btnElement) {
+            const items = document.querySelectorAll('.faq-item');
+            const buttons = document.querySelectorAll('.faq-item button');
+            
+            items.forEach((item, i) => {
+                if (i === index) {
+                    const isActive = item.classList.contains('active');
+                    if (isActive) {
+                        item.classList.remove('active');
+                        buttons[i].setAttribute('aria-expanded', 'false');
+                    } else {
+                        item.classList.add('active');
+                        buttons[i].setAttribute('aria-expanded', 'true');
+                    }
+                } else {
+                    item.classList.remove('active');
+                    buttons[i].setAttribute('aria-expanded', 'false');
                 }
             });
-        }, observerOptions);
+        }
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        // Sticky Logic
+        const stickyCta = document.getElementById('sticky-cta');
+        const whatsapp = document.getElementById('floating-whatsapp');
+        let stickyActive = false;
 
-        // Initialize Typing effect after a short delay
-        setTimeout(type, 800);
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            if (scrollPercent > 12) {
+                if (!stickyActive) {
+                    stickyCta.classList.add('visible');
+                    whatsapp.classList.add('cta-active');
+                    stickyActive = true;
+                    stickyCta.setAttribute('aria-hidden', 'false');
+                }
+            } else {
+                stickyCta.classList.remove('visible');
+                whatsapp.classList.remove('cta-active');
+                stickyActive = false;
+                stickyCta.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+        // Modal Logic
+        const modalData = {
+            'real-estate': { title: "Real Estate Engine", kpi: "40+ Leads", img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800" },
+            'fitness': { title: "Fitness Accelerator", kpi: "3x Bookings", img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800" },
+            'coaching': { title: "Masterclass Opt-in", kpi: "12.5% Opt-in", img: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800" }
+        };
+
+        function openModal(id) {
+            lastFocusedElement = document.activeElement; // Store focus
+            const data = modalData[id];
+            const modal = document.getElementById('project-modal');
+            const content = modal.querySelector('.modal-content');
+            
+            document.getElementById('modal-inner-content').innerHTML = `
+                <div class="rounded-[3rem] overflow-hidden aspect-[4/5]"><img src="${data.img}" alt="${data.title}" class="w-full h-full object-cover"></div>
+                <div class="flex flex-col justify-center">
+                    <h3 id="modal-title" class="text-4xl font-syne font-bold mb-8 tracking-tighter">${data.title}</h3>
+                    <p class="text-secondary text-xl mb-10 leading-relaxed">Built for speed and conversion.</p>
+                    <div class="p-10 bg-blue-600/10 border border-blue-600/20 rounded-[2.5rem] mb-10"><p class="text-3xl font-bold text-white">${data.kpi}</p></div>
+                    <a href="https://forms.gle/f5BTwn69W1uT1Gbz9" target="_blank" rel="noopener noreferrer" class="w-full py-6 bg-blue-600 text-white rounded-2xl font-bold text-xl text-center focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-obsidian">Start Project</a>
+                </div>`;
+            
+            modal.classList.remove('invisible');
+            setTimeout(() => {
+                content.classList.remove('opacity-0', 'translate-y-10');
+                document.getElementById('modal-close-btn').focus(); // Trap focus inside modal
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('project-modal');
+            const content = modal.querySelector('.modal-content');
+            content.classList.add('opacity-0', 'translate-y-10');
+            setTimeout(() => { 
+                modal.classList.add('invisible'); 
+                document.body.style.overflow = 'auto'; 
+                if (lastFocusedElement) lastFocusedElement.focus(); // Return focus
+            }, 500);
+        }
+
+        document.addEventListener('keydown', (e) => { 
+            if (e.key === 'Escape' && !document.getElementById('project-modal').classList.contains('invisible')) {
+                closeModal(); 
+            }
+        });
     </script>
 </body>
 </html>
