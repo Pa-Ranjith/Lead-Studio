@@ -215,57 +215,70 @@ export default function LandingPage() {
       {/* 5. OFFER SECTION */}
       <Section id="pricing" className="items-center">
         <div className="text-center mb-16">
-          <RevealText className="text-4xl md:text-6xl font-bold mb-4 font-syne">The Lead Page Starter</RevealText>
-          <RevealText className="text-xl text-slate-muted">A search-optimized landing page built for rapid enquiry generation.</RevealText>
+          <RevealText className="text-4xl md:text-6xl font-bold mb-4 font-syne">Built for Conversion.</RevealText>
+          <RevealText className="text-xl text-slate-muted">Simple, productized pricing for founders and small businesses.</RevealText>
         </div>
 
-        <motion.div 
-          className="w-full max-w-4xl premium-card rounded-[2.5rem] p-8 md:p-16 relative overflow-hidden group"
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="absolute top-0 right-0 p-8">
-            <div className="bg-brand text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full">
-              Limited slots available
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <div className="space-y-8">
-              <div>
-                <div className="text-brand font-bold mb-2 uppercase tracking-widest text-xs">Investment</div>
-                <div className="text-6xl font-bold">₹3k – ₹5k</div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full max-w-7xl">
+          {[
+            { 
+              name: "Starter", price: "39", tagline: "Quick validation", 
+              features: ["1 Section (Hero + CTA)", "WhatsApp integration", "2-Day delivery"],
+              cta: "Launch My Page"
+            },
+            { 
+              name: "Core", price: "149", tagline: "Lead-ready page", highlight: true,
+              features: ["Full page (5-6 sections)", "Form + WhatsApp", "SEO Optimized", "3-4 Day delivery"],
+              cta: "Get Started"
+            },
+            { 
+              name: "Pro", price: "399", tagline: "Growth optimized", 
+              features: ["Everything in Core", "Analytics setup", "Refined messaging", "2-3 Day priority"],
+              cta: "Upgrade Now"
+            }
+          ].map((tier, i) => (
+            <motion.div 
+              key={i}
+              className={`relative flex flex-col p-8 rounded-[2.5rem] border transition-all duration-500 ${
+                tier.highlight 
+                ? "bg-brand/5 border-brand shadow-[0_0_40px_-10px_rgba(16,185,129,0.2)] scale-105 z-10" 
+                : "bg-white/5 border-white/10"
+              }`}
+              whileHover={{ y: -5 }}
+            >
+              {tier.highlight && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
+                  Most Popular
+                </div>
+              )}
+              <h3 className="text-brand font-bold uppercase tracking-widest text-xs mb-4">{tier.name}</h3>
+              <div className="flex items-baseline gap-1 mb-2">
+                <span className="text-3xl font-bold">$</span>
+                <span className="text-6xl font-bold">{tier.price}</span>
               </div>
-              
-              <div>
-                <div className="text-brand font-bold mb-2 uppercase tracking-widest text-xs">Timeline</div>
-                <div className="text-3xl font-bold">2–3 Days Delivery</div>
-              </div>
-
-              <Link href="/contact" className="block w-full py-6 bg-white text-obsidian rounded-2xl text-center font-bold text-xl hover:bg-brand hover:text-white transition-all duration-300">
-                Secure My Slot
-              </Link>
-            </div>
-
-            <div className="space-y-6">
-              <h4 className="text-xl font-bold text-white/50 border-b border-white/10 pb-4">Package Includes:</h4>
-              <ul className="space-y-4">
-                {[
-                  "Conversion-focused copy structure",
-                  "SEO Metadata & Schema Markup",
-                  "Ultra-fast mobile optimization",
-                  "WhatsApp + Form integration",
-                  "12 Months hosting support"
-                ].map((li, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <CheckCircle2 className="text-brand w-5 h-5 flex-shrink-0" />
-                    <span className="text-lg">{li}</span>
+              <p className="text-lg font-bold mb-6">{tier.tagline}</p>
+              <ul className="space-y-4 mb-8 flex-grow">
+                {tier.features.map((feat, idx) => (
+                  <li key={idx} className="flex items-center gap-3 text-sm">
+                    <CheckCircle2 className="text-brand w-4 h-4 shrink-0" />
+                    {feat}
                   </li>
                 ))}
               </ul>
-            </div>
-          </div>
-        </motion.div>
+              <Link href="/pricing" className={`block w-full py-4 rounded-xl text-center font-bold transition-all ${
+                tier.highlight ? "bg-brand text-white" : "bg-white text-obsidian hover:bg-brand hover:text-white"
+              }`}>
+                {tier.cta}
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+        
+        <div className="mt-12 flex items-center gap-8 opacity-40 text-xs font-bold uppercase tracking-widest">
+          <span>No contracts</span>
+          <span>Fast delivery</span>
+          <span>Built for conversion</span>
+        </div>
       </Section>
 
       {/* 6. SAMPLE WORK SECTION */}
