@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @theme {
   --font-sans: var(--font-inter);
@@ -9,6 +7,9 @@
   --color-obsidian: #0A0A0A;
   --color-slate-muted: #64748B;
 }
+
+@custom-variant hover (&:hover);
+
 
 :root {
   --background: #0A0A0A;
