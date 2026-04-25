@@ -351,11 +351,12 @@ export default function LandingPage() {
       </Section>
 
       {/* 9. FINAL CTA */}
-      <Section className="items-center text-center bg-obsidian text-white py-40">
-        <div className="max-w-4xl relative z-10">
+      <Section className="flex flex-col items-center justify-center text-center bg-obsidian text-white py-40">
+        <div className="max-w-4xl relative z-10 mx-auto">
           <RevealText className="text-3xl md:text-5xl font-bold mb-8 text-stone-400 font-sans tracking-tight">
             Clarity works. <br/> <span className="text-white text-5xl md:text-8xl font-mono uppercase tracking-tighter block mt-6">Stop losing visitors.</span>
           </RevealText>
+
           
           <div className="flex flex-col md:flex-row gap-8 justify-center items-center mt-16">
             <Link href="/contact" className="px-12 py-8 bg-brand text-white font-mono font-bold text-2xl uppercase tracking-wide hover:scale-105 transition-transform shadow-[8px_8px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-[12px_12px_0px_0px_rgba(255,255,255,0.2)] w-full md:w-auto">
