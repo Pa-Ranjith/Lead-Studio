@@ -217,29 +217,34 @@ export default function LandingPage() {
         </div>
       </Section>
 
-      {/* 3. ROI SECTION */}
-      <Section className="bg-obsidian text-white text-center py-32">
-        <div className="max-w-7xl mx-auto">
-          <RevealText className="text-4xl md:text-7xl font-bold font-mono uppercase tracking-tighter mb-20">
-            Same Traffic. <br/> <span className="text-brand">Better Results.</span>
-          </RevealText>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 border-t border-stone-800 pt-20">
-            {[
-              { val: "4x", label: "Enquiries", accent: "↑" },
-              { val: "40-70%", label: "Conversion Rate" },
-              { val: "3x", label: "WhatsApp Leads", accent: "↑" }
-            ].map((stat, i) => (
-              <motion.div key={i} className="space-y-4">
-                <div className="text-6xl md:text-8xl font-bold font-mono tracking-tighter flex justify-center items-center gap-2">
-                  {stat.accent && <span className="text-brand text-4xl">{stat.accent}</span>}
-                  {stat.val}
-                </div>
-                <div className="text-stone-500 font-mono text-sm font-bold uppercase tracking-widest">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
+      {/* 1. ROI / IMPACT SECTION */}
+      <Section className="bg-white border-y border-stone-200">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+          {[
+            { label: "Enquiries", value: "4x", prefix: "↑", sub: "Growth in quality leads" },
+            { label: "Conversion Rate", value: "40-70%", sub: "Average across funnels" },
+            { label: "WhatsApp Leads", value: "3x", prefix: "↑", sub: "Higher engagement" },
+          ].map((stat, i) => (
+            <motion.div 
+              key={i} 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 * i }}
+              className="p-12 border-4 border-obsidian bg-white brutalist-shadow-lg hover:bg-brand hover:text-white transition-all duration-500 group cursor-default flex flex-col justify-center items-center text-center"
+              whileHover={{ y: -8, scale: 1.02 }}
+            >
+              <div className="flex items-baseline gap-2 mb-6">
+                {stat.prefix && <span className="text-brand text-4xl font-bold group-hover:text-white group-hover:translate-y-[-4px] transition-all">{stat.prefix}</span>}
+                <span className="text-7xl md:text-8xl font-bold font-mono tracking-tighter leading-none">{stat.value}</span>
+              </div>
+              <div className="text-2xl font-bold font-mono uppercase tracking-widest mb-4">{stat.label}</div>
+              <div className="text-stone-400 font-mono text-[10px] font-bold uppercase tracking-[0.2em] group-hover:text-white/70">{stat.sub}</div>
+            </motion.div>
+          ))}
         </div>
       </Section>
+
 
       {/* 4. SHIFT SECTION */}
       <Section className="flex flex-col items-center justify-center text-center bg-beige-dark/20">
