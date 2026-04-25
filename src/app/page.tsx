@@ -185,13 +185,14 @@ export default function LandingPage() {
 
 
       {/* 2. REALIZATION SECTION */}
-      <Section className="items-center bg-white">
+      <Section className="flex flex-col items-center justify-center bg-white">
         <div className="max-w-4xl text-center">
-          <RevealText className="text-4xl md:text-6xl font-bold mb-10 leading-tight font-mono uppercase tracking-tighter">
-            Visitors don't convert <br/> <span className="text-stone-500">because they're confused.</span>
+          <RevealText className="text-4xl md:text-6xl font-bold mb-16 leading-tight font-mono uppercase tracking-tighter mx-auto">
+            Visitors don't convert <br/> <span className="text-stone-500 text-3xl md:text-5xl">because they're confused.</span>
           </RevealText>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mb-20">
+
             {[
               { title: "No Direction", desc: "If you don't lead the visitor, they will leave in seconds.", id: "01" },
               { title: "Zero Intent", desc: "Traffic without intent is a vanity metric. We filter for qualified leads.", id: "02" },
@@ -241,8 +242,8 @@ export default function LandingPage() {
       </Section>
 
       {/* 4. SHIFT SECTION */}
-      <Section className="items-center text-center bg-beige-dark/20">
-        <div className="max-w-4xl space-y-12">
+      <Section className="flex flex-col items-center justify-center text-center bg-beige-dark/20">
+        <div className="max-w-4xl space-y-12 mx-auto">
           <RevealText className="text-3xl md:text-5xl font-bold font-sans tracking-tight text-stone-800 leading-tight">
             A good landing page doesn’t explain everything.
           </RevealText>
