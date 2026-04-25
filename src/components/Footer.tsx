@@ -4,7 +4,7 @@ import { MessageSquare } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer class="py-16 px-6 bg-white border-t border-stone-300">
+    <footer className="py-16 px-6 bg-white border-t border-stone-300">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center text-center">
           <div className="font-mono font-bold text-xl mb-6 flex items-center group cursor-pointer">

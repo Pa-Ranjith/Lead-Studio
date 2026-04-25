@@ -1,25 +1,12 @@
-@import "tailwindcss";
-
-@theme {
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-mono);
-  --font-syne: var(--font-syne);
-  
-  --color-brand: #10B981; /* Tech Emerald */
-  --color-obsidian: #1C1917; /* Tech Black */
-  --color-beige-light: #F5F5F4;
-  --color-beige-dark: #E7E5E4;
-  --color-slate-muted: #78716c;
-}
-
-@custom-variant hover (&:hover);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #F5F5F4;
   --foreground: #1C1917;
   --brand: #10B981;
 }
-
 
 @layer base {
   html {
@@ -63,27 +50,4 @@
     @apply border-brand -translate-y-1;
     box-shadow: 6px 6px 0px 0px #1C1917;
   }
-
-  .mask-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40;
-  }
 }
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0A0A0A;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #222;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--brand);
-}
-
